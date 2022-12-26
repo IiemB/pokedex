@@ -29,7 +29,7 @@ _$_PokemonDetails _$$_PokemonDetailsFromJson(Map<String, dynamic> json) =>
       order: json['order'] as int?,
       sprites: json['sprites'] == null
           ? null
-          : Sprites.fromJson(Map<String, String?>.from(json['sprites'] as Map)),
+          : Sprites.fromJson(json['sprites'] as Map<String, dynamic>),
       stats: (json['stats'] as List<dynamic>?)
           ?.map((e) => Stat.fromJson(e as Map<String, dynamic>))
           .toList(),

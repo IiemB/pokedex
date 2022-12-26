@@ -10,8 +10,7 @@ _$_GenerationV _$$_GenerationVFromJson(Map<String, dynamic> json) =>
     _$_GenerationV(
       blackWhite: json['black-white'] == null
           ? null
-          : BlackWhite.fromJson(
-              Map<String, String?>.from(json['black-white'] as Map)),
+          : BlackWhite.fromJson(json['black-white'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_GenerationVToJson(_$_GenerationV instance) =>

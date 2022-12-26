@@ -10,8 +10,7 @@ _$_BlackWhite _$$_BlackWhiteFromJson(Map<String, dynamic> json) =>
     _$_BlackWhite(
       animated: json['animated'] == null
           ? null
-          : Animated.fromJson(
-              Map<String, String?>.from(json['animated'] as Map)),
+          : Animated.fromJson(json['animated'] as Map<String, dynamic>),
       backDefault: json['back_default'] as String?,
       backFemale: json['back_female'] as String?,
       backShiny: json['back_shiny'] as String?,

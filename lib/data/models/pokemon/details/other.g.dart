@@ -9,11 +9,10 @@ part of 'other.dart';
 _$_Other _$$_OtherFromJson(Map<String, dynamic> json) => _$_Other(
       dreamWorld: json['dream_world'] == null
           ? null
-          : DreamWorld.fromJson(
-              Map<String, String?>.from(json['dream_world'] as Map)),
+          : DreamWorld.fromJson(json['dream_world'] as Map<String, dynamic>),
       home: json['home'] == null
           ? null
-          : Home.fromJson(Map<String, String?>.from(json['home'] as Map)),
+          : Home.fromJson(json['home'] as Map<String, dynamic>),
       officialArtwork: json['official-artwork'] == null
           ? null
           : OfficialArtwork.fromJson(

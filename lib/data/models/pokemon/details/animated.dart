@@ -18,6 +18,6 @@ class Animated with _$Animated {
     @JsonKey(name: 'front_shiny_female') String? frontShinyFemale,
   }) = _Animated;
 
-  factory Animated.fromJson(Map<String, String?> json) =>
+  factory Animated.fromJson(Map<String, dynamic> json) =>
       _$AnimatedFromJson(json);
 }

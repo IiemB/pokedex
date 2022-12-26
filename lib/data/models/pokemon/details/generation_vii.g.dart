@@ -10,11 +10,11 @@ _$_GenerationVii _$$_GenerationViiFromJson(Map<String, dynamic> json) =>
     _$_GenerationVii(
       icons: json['icons'] == null
           ? null
-          : Icons.fromJson(Map<String, String?>.from(json['icons'] as Map)),
+          : Icons.fromJson(json['icons'] as Map<String, dynamic>),
       ultraSunUltraMoon: json['ultra-sun-ultra-moon'] == null
           ? null
           : UltraSunUltraMoon.fromJson(
-              Map<String, String?>.from(json['ultra-sun-ultra-moon'] as Map)),
+              json['ultra-sun-ultra-moon'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_GenerationViiToJson(_$_GenerationVii instance) =>

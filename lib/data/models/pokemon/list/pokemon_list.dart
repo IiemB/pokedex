@@ -10,7 +10,7 @@ class PokemonList with _$PokemonList {
     int? count,
     String? next,
     String? previous,
-    List<Result>? results,
+    List<Pokemon>? results,
   }) = _PokemonList;
 
   factory PokemonList.fromJson(Map<String, dynamic> json) =>

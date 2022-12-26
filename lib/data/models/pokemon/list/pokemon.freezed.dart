@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'result.dart';
+part of 'pokemon.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,32 +14,32 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Result _$ResultFromJson(Map<String, dynamic> json) {
-  return _Result.fromJson(json);
+Pokemon _$PokemonFromJson(Map<String, dynamic> json) {
+  return _Pokemon.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Result {
+mixin _$Pokemon {
   String? get name => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ResultCopyWith<Result> get copyWith => throw _privateConstructorUsedError;
+  $PokemonCopyWith<Pokemon> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ResultCopyWith<$Res> {
-  factory $ResultCopyWith(Result value, $Res Function(Result) then) =
-      _$ResultCopyWithImpl<$Res, Result>;
+abstract class $PokemonCopyWith<$Res> {
+  factory $PokemonCopyWith(Pokemon value, $Res Function(Pokemon) then) =
+      _$PokemonCopyWithImpl<$Res, Pokemon>;
   @useResult
   $Res call({String? name, String? url});
 }
 
 /// @nodoc
-class _$ResultCopyWithImpl<$Res, $Val extends Result>
-    implements $ResultCopyWith<$Res> {
-  _$ResultCopyWithImpl(this._value, this._then);
+class _$PokemonCopyWithImpl<$Res, $Val extends Pokemon>
+    implements $PokemonCopyWith<$Res> {
+  _$PokemonCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -66,19 +66,20 @@ class _$ResultCopyWithImpl<$Res, $Val extends Result>
 }
 
 /// @nodoc
-abstract class _$$_ResultCopyWith<$Res> implements $ResultCopyWith<$Res> {
-  factory _$$_ResultCopyWith(_$_Result value, $Res Function(_$_Result) then) =
-      __$$_ResultCopyWithImpl<$Res>;
+abstract class _$$_PokemonCopyWith<$Res> implements $PokemonCopyWith<$Res> {
+  factory _$$_PokemonCopyWith(
+          _$_Pokemon value, $Res Function(_$_Pokemon) then) =
+      __$$_PokemonCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String? name, String? url});
 }
 
 /// @nodoc
-class __$$_ResultCopyWithImpl<$Res>
-    extends _$ResultCopyWithImpl<$Res, _$_Result>
-    implements _$$_ResultCopyWith<$Res> {
-  __$$_ResultCopyWithImpl(_$_Result _value, $Res Function(_$_Result) _then)
+class __$$_PokemonCopyWithImpl<$Res>
+    extends _$PokemonCopyWithImpl<$Res, _$_Pokemon>
+    implements _$$_PokemonCopyWith<$Res> {
+  __$$_PokemonCopyWithImpl(_$_Pokemon _value, $Res Function(_$_Pokemon) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -87,7 +88,7 @@ class __$$_ResultCopyWithImpl<$Res>
     Object? name = freezed,
     Object? url = freezed,
   }) {
-    return _then(_$_Result(
+    return _then(_$_Pokemon(
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -102,11 +103,11 @@ class __$$_ResultCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Result implements _Result {
-  _$_Result({this.name, this.url});
+class _$_Pokemon implements _Pokemon {
+  _$_Pokemon({this.name, this.url});
 
-  factory _$_Result.fromJson(Map<String, dynamic> json) =>
-      _$$_ResultFromJson(json);
+  factory _$_Pokemon.fromJson(Map<String, dynamic> json) =>
+      _$$_PokemonFromJson(json);
 
   @override
   final String? name;
@@ -115,14 +116,14 @@ class _$_Result implements _Result {
 
   @override
   String toString() {
-    return 'Result(name: $name, url: $url)';
+    return 'Pokemon(name: $name, url: $url)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Result &&
+            other is _$_Pokemon &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.url, url) || other.url == url));
   }
@@ -134,21 +135,21 @@ class _$_Result implements _Result {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ResultCopyWith<_$_Result> get copyWith =>
-      __$$_ResultCopyWithImpl<_$_Result>(this, _$identity);
+  _$$_PokemonCopyWith<_$_Pokemon> get copyWith =>
+      __$$_PokemonCopyWithImpl<_$_Pokemon>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ResultToJson(
+    return _$$_PokemonToJson(
       this,
     );
   }
 }
 
-abstract class _Result implements Result {
-  factory _Result({final String? name, final String? url}) = _$_Result;
+abstract class _Pokemon implements Pokemon {
+  factory _Pokemon({final String? name, final String? url}) = _$_Pokemon;
 
-  factory _Result.fromJson(Map<String, dynamic> json) = _$_Result.fromJson;
+  factory _Pokemon.fromJson(Map<String, dynamic> json) = _$_Pokemon.fromJson;
 
   @override
   String? get name;
@@ -156,6 +157,6 @@ abstract class _Result implements Result {
   String? get url;
   @override
   @JsonKey(ignore: true)
-  _$$_ResultCopyWith<_$_Result> get copyWith =>
+  _$$_PokemonCopyWith<_$_Pokemon> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -11,15 +11,14 @@ _$_GenerationIv _$$_GenerationIvFromJson(Map<String, dynamic> json) =>
       diamondPearl: json['diamond-pearl'] == null
           ? null
           : DiamondPearl.fromJson(
-              Map<String, String?>.from(json['diamond-pearl'] as Map)),
+              json['diamond-pearl'] as Map<String, dynamic>),
       heartgoldSoulsilver: json['heartgold-soulsilver'] == null
           ? null
           : HeartgoldSoulsilver.fromJson(
-              Map<String, String?>.from(json['heartgold-soulsilver'] as Map)),
+              json['heartgold-soulsilver'] as Map<String, dynamic>),
       platinum: json['platinum'] == null
           ? null
-          : Platinum.fromJson(
-              Map<String, String?>.from(json['platinum'] as Map)),
+          : Platinum.fromJson(json['platinum'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_GenerationIvToJson(_$_GenerationIv instance) =>

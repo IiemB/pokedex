@@ -20,6 +20,6 @@ class BlackWhite with _$BlackWhite {
     @JsonKey(name: 'front_shiny_female') String? frontShinyFemale,
   }) = _BlackWhite;
 
-  factory BlackWhite.fromJson(Map<String, String?> json) =>
+  factory BlackWhite.fromJson(Map<String, dynamic> json) =>
       _$BlackWhiteFromJson(json);
 }

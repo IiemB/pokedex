@@ -23,7 +23,7 @@ mixin _$PokemonList {
   int? get count => throw _privateConstructorUsedError;
   String? get next => throw _privateConstructorUsedError;
   String? get previous => throw _privateConstructorUsedError;
-  List<Result>? get results => throw _privateConstructorUsedError;
+  List<Pokemon>? get results => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,7 +38,7 @@ abstract class $PokemonListCopyWith<$Res> {
       _$PokemonListCopyWithImpl<$Res, PokemonList>;
   @useResult
   $Res call(
-      {int? count, String? next, String? previous, List<Result>? results});
+      {int? count, String? next, String? previous, List<Pokemon>? results});
 }
 
 /// @nodoc
@@ -75,7 +75,7 @@ class _$PokemonListCopyWithImpl<$Res, $Val extends PokemonList>
       results: freezed == results
           ? _value.results
           : results // ignore: cast_nullable_to_non_nullable
-              as List<Result>?,
+              as List<Pokemon>?,
     ) as $Val);
   }
 }
@@ -89,7 +89,7 @@ abstract class _$$_PokemonListCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? count, String? next, String? previous, List<Result>? results});
+      {int? count, String? next, String? previous, List<Pokemon>? results});
 }
 
 /// @nodoc
@@ -124,7 +124,7 @@ class __$$_PokemonListCopyWithImpl<$Res>
       results: freezed == results
           ? _value._results
           : results // ignore: cast_nullable_to_non_nullable
-              as List<Result>?,
+              as List<Pokemon>?,
     ));
   }
 }
@@ -133,7 +133,7 @@ class __$$_PokemonListCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PokemonList implements _PokemonList {
   _$_PokemonList(
-      {this.count, this.next, this.previous, final List<Result>? results})
+      {this.count, this.next, this.previous, final List<Pokemon>? results})
       : _results = results;
 
   factory _$_PokemonList.fromJson(Map<String, dynamic> json) =>
@@ -145,9 +145,9 @@ class _$_PokemonList implements _PokemonList {
   final String? next;
   @override
   final String? previous;
-  final List<Result>? _results;
+  final List<Pokemon>? _results;
   @override
-  List<Result>? get results {
+  List<Pokemon>? get results {
     final value = _results;
     if (value == null) return null;
     if (_results is EqualUnmodifiableListView) return _results;
@@ -196,7 +196,7 @@ abstract class _PokemonList implements PokemonList {
       {final int? count,
       final String? next,
       final String? previous,
-      final List<Result>? results}) = _$_PokemonList;
+      final List<Pokemon>? results}) = _$_PokemonList;
 
   factory _PokemonList.fromJson(Map<String, dynamic> json) =
       _$_PokemonList.fromJson;
@@ -208,7 +208,7 @@ abstract class _PokemonList implements PokemonList {
   @override
   String? get previous;
   @override
-  List<Result>? get results;
+  List<Pokemon>? get results;
   @override
   @JsonKey(ignore: true)
   _$$_PokemonListCopyWith<_$_PokemonList> get copyWith =>

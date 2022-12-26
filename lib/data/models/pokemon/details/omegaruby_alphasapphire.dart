@@ -14,6 +14,6 @@ class OmegarubyAlphasapphire with _$OmegarubyAlphasapphire {
     @JsonKey(name: 'front_shiny_female') String? frontShinyFemale,
   }) = _OmegarubyAlphasapphire;
 
-  factory OmegarubyAlphasapphire.fromJson(Map<String, String?> json) =>
+  factory OmegarubyAlphasapphire.fromJson(Map<String, dynamic> json) =>
       _$OmegarubyAlphasapphireFromJson(json);
 }

@@ -14,6 +14,6 @@ class UltraSunUltraMoon with _$UltraSunUltraMoon {
     @JsonKey(name: 'front_shiny_female') String? frontShinyFemale,
   }) = _UltraSunUltraMoon;
 
-  factory UltraSunUltraMoon.fromJson(Map<String, String?> json) =>
+  factory UltraSunUltraMoon.fromJson(Map<String, dynamic> json) =>
       _$UltraSunUltraMoonFromJson(json);
 }

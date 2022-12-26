@@ -1,2 +1,2 @@
 export 'pokemon_list.dart';
-export 'result.dart';
+export 'pokemon.dart';

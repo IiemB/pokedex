@@ -14,5 +14,5 @@ class Xy with _$Xy {
     @JsonKey(name: 'front_shiny_female') String? frontShinyFemale,
   }) = _Xy;
 
-  factory Xy.fromJson(Map<String, String?> json) => _$XyFromJson(json);
+  factory Xy.fromJson(Map<String, dynamic> json) => _$XyFromJson(json);
 }

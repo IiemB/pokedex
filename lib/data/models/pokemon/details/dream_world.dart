@@ -12,6 +12,6 @@ class DreamWorld with _$DreamWorld {
     @JsonKey(name: 'front_female') String? frontFemale,
   }) = _DreamWorld;
 
-  factory DreamWorld.fromJson(Map<String, String?> json) =>
+  factory DreamWorld.fromJson(Map<String, dynamic> json) =>
       _$DreamWorldFromJson(json);
 }

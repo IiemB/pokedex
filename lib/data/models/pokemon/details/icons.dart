@@ -12,5 +12,5 @@ class Icons with _$Icons {
     @JsonKey(name: 'front_female') String? frontFemale,
   }) = _Icons;
 
-  factory Icons.fromJson(Map<String, String?> json) => _$IconsFromJson(json);
+  factory Icons.fromJson(Map<String, dynamic> json) => _$IconsFromJson(json);
 }

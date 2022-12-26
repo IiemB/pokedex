@@ -10,7 +10,7 @@ _$_GenerationViii _$$_GenerationViiiFromJson(Map<String, dynamic> json) =>
     _$_GenerationViii(
       icons: json['icons'] == null
           ? null
-          : Icons.fromJson(Map<String, String?>.from(json['icons'] as Map)),
+          : Icons.fromJson(json['icons'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_GenerationViiiToJson(_$_GenerationViii instance) =>

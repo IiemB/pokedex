@@ -21,6 +21,6 @@ class Sprites with _$Sprites {
     Versions? versions,
   }) = _Sprites;
 
-  factory Sprites.fromJson(Map<String, String?> json) =>
+  factory Sprites.fromJson(Map<String, dynamic> json) =>
       _$SpritesFromJson(json);
 }

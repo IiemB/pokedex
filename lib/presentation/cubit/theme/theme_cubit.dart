@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:pokedex/common/app_theme.dart';
+import 'package:pokedex/utils/utils.dart';
 
 part 'theme_state.dart';
 
 class ThemeCubit extends HydratedCubit<ThemeState> {
   ThemeCubit() : super(ThemeState.light);
 
-  void update(ThemeState state) => emit(state);
+  final _themes = <ThemeState>[];
+
+  void update() {
+    if (_themes.isEmpty) {
+      _themes.addAll(ThemeState.values);
+    }
+    emit(_themes.last);
+    _themes.removeLast();
+  }
 
   @override
   ThemeState? fromJson(Map<String, dynamic> json) {

@@ -1,12 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pokedex/core/core.dart';
 import 'package:pokedex/presentation/presentation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  initInjector();
 
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getTemporaryDirectory(),
@@ -29,67 +33,18 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => ThemeCubit()),
         ],
         child: BlocBuilder<ThemeCubit, ThemeState>(
-          builder: (context, state) {
-            return MaterialApp(
-              title: 'Flutter Demo',
-              themeMode: state.themeMode,
-              theme: state.themeData,
-              home: const MyHomePage(title: 'Flutter Demo Home Page'),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-      if (_counter.isEven) {
-        BlocProvider.of<ThemeCubit>(context).update(ThemeState.dark);
-      } else {
-        BlocProvider.of<ThemeCubit>(context).update(ThemeState.light);
-      }
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+          builder: (context, state) => MaterialApp.router(
+            title: 'Pokedex',
+            themeMode: state.themeMode,
+            theme: state.themeData,
+            routerDelegate: AutoRouterDelegate(
+              router,
+              navigatorObservers: () => [],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+            routeInformationProvider: router.routeInfoProvider(),
+            routeInformationParser: router.defaultRouteParser(),
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }

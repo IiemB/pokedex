@@ -1,1 +1,1 @@
-
+export 'pokemon/pokemon.dart';

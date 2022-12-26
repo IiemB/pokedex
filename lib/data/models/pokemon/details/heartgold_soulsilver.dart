@@ -18,6 +18,6 @@ class HeartgoldSoulsilver with _$HeartgoldSoulsilver {
     @JsonKey(name: 'front_shiny_female') String? frontShinyFemale,
   }) = _HeartgoldSoulsilver;
 
-  factory HeartgoldSoulsilver.fromJson(Map<String, String?> json) =>
+  factory HeartgoldSoulsilver.fromJson(Map<String, dynamic> json) =>
       _$HeartgoldSoulsilverFromJson(json);
 }

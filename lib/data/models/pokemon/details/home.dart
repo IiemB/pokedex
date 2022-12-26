@@ -14,5 +14,5 @@ class Home with _$Home {
     @JsonKey(name: 'front_shiny_female') String? frontShinyFemale,
   }) = _Home;
 
-  factory Home.fromJson(Map<String, String?> json) => _$HomeFromJson(json);
+  factory Home.fromJson(Map<String, dynamic> json) => _$HomeFromJson(json);
 }

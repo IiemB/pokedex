@@ -18,6 +18,6 @@ class Platinum with _$Platinum {
     @JsonKey(name: 'front_shiny_female') String? frontShinyFemale,
   }) = _Platinum;
 
-  factory Platinum.fromJson(Map<String, String?> json) =>
+  factory Platinum.fromJson(Map<String, dynamic> json) =>
       _$PlatinumFromJson(json);
 }
