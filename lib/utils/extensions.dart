@@ -27,12 +27,12 @@ extension ThemeDataExtension on ThemeData {
         ),
         appBarTheme: appBarTheme.copyWith(
           // centerTitle: true,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(16),
-            ),
-          ),
-          // color: scaffoldBackgroundColor.withOpacity(0.8),
+          // shape: const RoundedRectangleBorder(
+          //   borderRadius: BorderRadius.vertical(
+          //     bottom: Radius.circular(16),
+          //   ),
+          // ),
+          color: scaffoldBackgroundColor.withOpacity(0.8),
           titleTextStyle: textTheme.headline5?.copyWith(
             fontWeight: FontWeight.w500,
             fontSize: 24.sp,

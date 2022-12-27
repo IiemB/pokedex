@@ -49,6 +49,7 @@ class _HomePageState extends State<HomePage> {
               }),
             slivers: [
               const SliverAppBar(
+                floating: true,
                 title: Text('Pokedex'),
                 actions: [ChangeThemeButton()],
               ),
@@ -63,15 +64,20 @@ class _HomePageState extends State<HomePage> {
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10,
                     ),
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) => PokemonCard(
-                        pokemon: value.pokemons[index],
-                      ),
-                      childCount: value.pokemons.length,
+                    delegate: SliverChildListDelegate(
+                      value.pokemons
+                          .map((e) => PokemonCard(pokemon: e))
+                          .toList(),
                     ),
+                    // delegate: SliverChildBuilderDelegate(
+
+                    //   (context, index) => PokemonCard(
+                    //     pokemon: value.pokemons[index],
+                    //   ),
+
+                    //   childCount: value.pokemons.length,
+                    // ),
                   ),
                 ),
               ),

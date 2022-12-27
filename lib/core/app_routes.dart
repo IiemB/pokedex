@@ -3,9 +3,12 @@ part of 'core.dart';
 @MaterialAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: <AutoRoute>[
-    RedirectRoute(path: '/', redirectTo: HomePage.routeName),
     AutoRoute(
       initial: true,
+      page: SplashPage,
+      path: SplashPage.routeName,
+    ),
+    AutoRoute(
       page: HomePage,
       path: HomePage.routeName,
     ),

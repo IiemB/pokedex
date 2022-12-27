@@ -57,7 +57,7 @@ class CacheManager {
     }
   }
 
-  static Future<File?> getSvgFile(String? url, {bool? force}) async {
+  static Future<File?> getCacheFile(String? url, {bool? force}) async {
     try {
       // await DefaultCacheManager().emptyCache();
 

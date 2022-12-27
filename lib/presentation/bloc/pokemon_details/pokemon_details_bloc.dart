@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -23,6 +24,12 @@ class PokemonDetailsBloc
     _GetPokemonDetail event,
     Emitter<PokemonDetailsState> emit,
   ) async {
+    final isLoaded = state.mapOrNull(loaded: (value) => true);
+
+    if (isLoaded == true) {
+      return;
+    }
+
     emit(const PokemonDetailsState.loading());
 
     final url = event.url;
@@ -36,23 +43,75 @@ class PokemonDetailsBloc
     await result.fold(
       (l) async => emit(PokemonDetailsState.error(l)),
       (r) async {
-        final file = await CacheManager.getSvgFile(
+        PaletteGenerator? paletteSvg;
+        PaletteGenerator? paletteImage;
+        File? svgFile;
+        File? imageFile;
+
+        svgFile = await CacheManager.getCacheFile(
           r.sprites?.other?.dreamWorld?.frontDefault,
         );
 
-        PaletteGenerator? palette;
+        if (svgFile != null) {
+          paletteSvg = await PaletteGenerator.fromImageProvider(
+            Svg(svgFile.path, source: SvgSource.file),
+          );
+        }
 
-        if (file != null) {
-          palette = await PaletteGenerator.fromImageProvider(
-            Svg(file.path, source: SvgSource.file),
+        if (svgFile != null && paletteSvg != null) {
+          emit(
+            PokemonDetailsState.loaded(
+              pokemonDetails: r,
+              svgFile: svgFile,
+              imageFile: imageFile,
+              paletteSvg: paletteSvg,
+              paletteImage: paletteImage,
+            ),
+          );
+          return;
+        }
+
+        imageFile = await CacheManager.getCacheFile(
+          r.sprites?.other?.officialArtwork?.frontDefault,
+        );
+
+        if (imageFile != null) {
+          paletteImage = await PaletteGenerator.fromImageProvider(
+            FileImage(imageFile),
+          );
+        }
+
+        if (imageFile != null && paletteImage != null) {
+          emit(
+            PokemonDetailsState.loaded(
+              pokemonDetails: r,
+              svgFile: svgFile,
+              imageFile: imageFile,
+              paletteSvg: paletteSvg,
+              paletteImage: paletteImage,
+            ),
+          );
+          return;
+        }
+
+        imageFile = await CacheManager.getCacheFile(
+          r.sprites?.frontDefault ??
+              r.sprites?.versions?.generationViii?.icons?.frontDefault,
+        );
+
+        if (imageFile != null) {
+          paletteImage = await PaletteGenerator.fromImageProvider(
+            FileImage(imageFile),
           );
         }
 
         emit(
           PokemonDetailsState.loaded(
             pokemonDetails: r,
-            svgFile: file,
-            palette: palette,
+            svgFile: svgFile,
+            imageFile: imageFile,
+            paletteSvg: paletteSvg,
+            paletteImage: paletteImage,
           ),
         );
       },

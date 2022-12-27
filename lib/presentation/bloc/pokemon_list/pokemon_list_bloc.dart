@@ -40,4 +40,12 @@ class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
       },
     );
   }
+
+  @override
+  Future<void> close() async {
+    for (var element in _pokemons) {
+      await element.close();
+    }
+    return super.close();
+  }
 }
