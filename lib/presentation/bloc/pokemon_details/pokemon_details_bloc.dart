@@ -47,7 +47,7 @@ class PokemonDetailsBloc
         File? svgFile;
         File? imageFile;
 
-        svgFile = await CacheManager.getCacheFile(
+        svgFile = await cacheManager.getCacheFile(
           r.sprites?.other?.dreamWorld?.frontDefault,
         );
 
@@ -70,7 +70,7 @@ class PokemonDetailsBloc
           return;
         }
 
-        imageFile = await CacheManager.getCacheFile(
+        imageFile = await cacheManager.getCacheFile(
           r.sprites?.other?.officialArtwork?.frontDefault,
         );
 

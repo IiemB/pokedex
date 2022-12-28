@@ -8,8 +8,6 @@ import 'package:pokedex/data/data.dart';
 class PokedexRemoteDatasourcesImpl implements PokedexRemoteDatasources {
   final _dio = AppDio.instance;
 
-  final _cacheManager = CacheManager();
-
   @override
   Future<PokemonList> getPokemons(String url) async {
     try {
@@ -27,7 +25,7 @@ class PokedexRemoteDatasourcesImpl implements PokedexRemoteDatasources {
         return data;
       }
 
-      final cachedJsonData = await _cacheManager.getJson(url);
+      final cachedJsonData = await cacheManager.getJson(url);
 
       if (cachedJsonData != null) {
         return PokemonList.fromJson(cachedJsonData);
@@ -35,7 +33,7 @@ class PokedexRemoteDatasourcesImpl implements PokedexRemoteDatasources {
 
       final data = await getData();
 
-      await _cacheManager.saveJson(url, data.toJson());
+      await cacheManager.saveJson(url, data.toJson());
 
       return data;
     } catch (e) {
@@ -60,7 +58,7 @@ class PokedexRemoteDatasourcesImpl implements PokedexRemoteDatasources {
         return data;
       }
 
-      final cachedJsonData = await _cacheManager.getJson(url);
+      final cachedJsonData = await cacheManager.getJson(url);
 
       if (cachedJsonData != null) {
         return PokemonDetails.fromJson(cachedJsonData);
@@ -68,7 +66,7 @@ class PokedexRemoteDatasourcesImpl implements PokedexRemoteDatasources {
 
       final data = await getData();
 
-      await _cacheManager.saveJson(url, data.toJson());
+      await cacheManager.saveJson(url, data.toJson());
 
       return data;
     } catch (e) {

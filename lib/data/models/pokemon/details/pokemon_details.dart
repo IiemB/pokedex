@@ -29,3 +29,7 @@ class PokemonDetails with _$PokemonDetails {
   factory PokemonDetails.fromJson(Map<String, dynamic> json) =>
       _$PokemonDetailsFromJson(json);
 }
+
+extension PokemonDetailsExtension on PokemonDetails {
+  List<String> get images => [];
+}

@@ -1,23 +1,29 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:injectable/injectable.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:pokedex/core/core.dart';
+
+final cacheManager = getIt<CacheManager>();
 
 @lazySingleton
 class CacheManager {
-  Directory? _cacheDirectory;
+  final _cacheManager = DefaultCacheManager();
 
   Future<Map<String, dynamic>?> getJson(String url) async {
     try {
       final key = url.replaceAll('/', '-');
 
-      _cacheDirectory ??= await getTemporaryDirectory();
+      final jsonCacheFile = await _cacheManager
+          .getFileFromCache(key)
+          .then((value) => value?.file);
 
-      final jsonCachePath = '${_cacheDirectory?.path}/$key.json';
-
-      final jsonCacheFile = File(jsonCachePath);
+      if (jsonCacheFile == null) {
+        return null;
+      }
 
       if (await jsonCacheFile.exists()) {
         final jsonString = await jsonCacheFile.readAsString();
@@ -29,7 +35,8 @@ class CacheManager {
 
       return null;
     } catch (e) {
-      rethrow;
+      log(e.toString());
+      return null;
     }
   }
 
@@ -37,14 +44,14 @@ class CacheManager {
     try {
       final key = url.replaceAll('/', '-');
 
-      _cacheDirectory ??= await getTemporaryDirectory();
+      final codeUnits =
+          const JsonEncoder.withIndent('  ').convert(json).codeUnits;
 
-      final jsonCachePath = '${_cacheDirectory?.path}/$key.json';
-
-      final jsonCacheFile = File(jsonCachePath);
-
-      final jsonCachedFile = await jsonCacheFile.writeAsString(
-        const JsonEncoder.withIndent('  ').convert(json),
+      final jsonCachedFile = await _cacheManager.putFile(
+        url,
+        Uint8List.fromList(codeUnits),
+        key: key,
+        fileExtension: 'json',
       );
 
       if (await jsonCachedFile.exists()) {
@@ -53,11 +60,12 @@ class CacheManager {
 
       return false;
     } catch (e) {
-      rethrow;
+      log(e.toString());
+      return false;
     }
   }
 
-  static Future<File?> getCacheFile(String? url, {bool? force}) async {
+  Future<File?> getCacheFile(String? url, {bool? force}) async {
     try {
       // await DefaultCacheManager().emptyCache();
 
@@ -80,7 +88,16 @@ class CacheManager {
 
       return result;
     } catch (e) {
-      rethrow;
+      log(e.toString());
+      return null;
+    }
+  }
+
+  Future<void> clearCache() async {
+    try {
+      await DefaultCacheManager().emptyCache();
+    } catch (e) {
+      log(e.toString());
     }
   }
 }
