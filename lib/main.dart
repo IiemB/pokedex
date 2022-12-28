@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
       builder: (context, _) => MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => ThemeCubit()),
+          BlocProvider(create: (context) => GridCountCubit()),
         ],
         child: BlocBuilder<ThemeCubit, ThemeState>(
           builder: (context, state) => MaterialApp.router(

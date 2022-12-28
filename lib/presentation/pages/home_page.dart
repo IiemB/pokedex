@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/presentation/presentation.dart';
+import 'package:pokedex/utils/utils.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = 'home';
@@ -25,9 +28,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          PokemonListBloc()..add(const PokemonListEvent.getPokemons()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              PokemonListBloc()..add(const PokemonListEvent.getPokemons()),
+        ),
+      ],
       child: Builder(
         builder: (context) => Scaffold(
           body: Scrollbar(
@@ -51,10 +58,18 @@ class _HomePageState extends State<HomePage> {
                   }
                 }),
               slivers: [
-                const SliverAppBar(
+                SliverAppBar(
                   floating: true,
-                  title: Text('Pokedex'),
-                  actions: [ChangeThemeButton()],
+                  title: const Text('Pokedex'),
+                  actions: [
+                    IconButton(
+                      tooltip: 'Settings',
+                      onPressed: () => context.showBottomSheet(
+                        builder: (context) => const SettingsDialogue(),
+                      ),
+                      icon: const Icon(Icons.settings),
+                    )
+                  ],
                 ),
                 BlocBuilder<PokemonListBloc, PokemonListState>(
                   buildWhen: (previous, current) => current.maybeMap(
@@ -63,15 +78,16 @@ class _HomePageState extends State<HomePage> {
                   ),
                   builder: (context, state) => state.maybeMap(
                     orElse: () => const SliverToBoxAdapter(),
-                    loaded: (value) => SliverGrid(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                      ),
-                      delegate: SliverChildListDelegate(
-                        value.pokemons
-                            .map((e) => PokemonCard(pokemon: e))
-                            .toList(),
+                    loaded: (value) => BlocBuilder<GridCountCubit, int>(
+                      builder: (context, state) => SliverGrid(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: state,
+                        ),
+                        delegate: SliverChildListDelegate(
+                          value.pokemons
+                              .map((e) => PokemonCard(pokemon: e))
+                              .toList(),
+                        ),
                       ),
                     ),
                   ),
@@ -79,9 +95,17 @@ class _HomePageState extends State<HomePage> {
                 BlocBuilder<PokemonListBloc, PokemonListState>(
                   builder: (context, state) => state.maybeMap(
                     orElse: () => const SliverToBoxAdapter(),
-                    loading: (value) => const SliverToBoxAdapter(
-                      child: Center(
-                        child: CircularProgressIndicator(),
+                    loading: (value) => BlocBuilder<GridCountCubit, int>(
+                      builder: (context, state) => SliverGrid(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: state,
+                        ),
+                        delegate: SliverChildListDelegate(
+                          List.generate(
+                            Random().nextInt(8) + 3,
+                            (index) => const PokemonCardEmpty(),
+                          ),
+                        ),
                       ),
                     ),
                   ),

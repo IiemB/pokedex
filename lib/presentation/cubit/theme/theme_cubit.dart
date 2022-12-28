@@ -10,7 +10,11 @@ class ThemeCubit extends HydratedCubit<ThemeState> {
 
   final _themes = <ThemeState>[];
 
-  void update() {
+  void update({ThemeState? state}) {
+    if (state != null) {
+      emit(state);
+      return;
+    }
     if (_themes.isEmpty) {
       _themes.addAll(ThemeState.values);
     }

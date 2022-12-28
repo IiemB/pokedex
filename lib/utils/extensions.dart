@@ -21,6 +21,47 @@ extension BuildContextExtension on BuildContext {
   }
 
   ThemeData get theme => Theme.of(this);
+
+  Future<T?> showBottomSheet<T>({
+    required Widget Function(BuildContext context) builder,
+    Color? backgroundColor,
+    double? elevation,
+    ShapeBorder? shape,
+    Clip? clipBehavior,
+    BoxConstraints? constraints,
+    Color? barrierColor,
+
+    /// Configured to true
+    bool isScrollControlled = true,
+
+    /// Configured to true
+    bool useRootNavigator = true,
+    bool isDismissible = true,
+    bool enableDrag = true,
+    RouteSettings? routeSettings,
+    AnimationController? transitionAnimationController,
+    Offset? anchorPoint,
+  }) async {
+    final result = await showModalBottomSheet<T>(
+      context: this,
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      shape: shape,
+      clipBehavior: clipBehavior,
+      constraints: constraints,
+      barrierColor: backgroundColor,
+      isScrollControlled: isScrollControlled,
+      useRootNavigator: useRootNavigator,
+      isDismissible: isDismissible,
+      enableDrag: enableDrag,
+      routeSettings: routeSettings,
+      transitionAnimationController: transitionAnimationController,
+      anchorPoint: anchorPoint,
+      builder: builder,
+    );
+
+    return result;
+  }
 }
 
 extension ColorExtension on Color {

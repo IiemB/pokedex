@@ -34,7 +34,7 @@ class PokemonCard extends StatelessWidget {
                   router.push(PokemonDetailsRoute(pokemon: pokemon)),
             ),
             child: Stack(
-              alignment: Alignment.bottomCenter,
+              alignment: Alignment.center,
               children: [
                 Padding(
                   padding: EdgeInsets.fromLTRB(16, 16, 16, 32.sp),
@@ -87,6 +87,21 @@ class PokemonCard extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class PokemonCardEmpty extends StatelessWidget {
+  const PokemonCardEmpty({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Pokemon.getRandomColor,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(20, 20, 20, 32.sp + 4),
+        child: Assets.images.icon.image(),
       ),
     );
   }
