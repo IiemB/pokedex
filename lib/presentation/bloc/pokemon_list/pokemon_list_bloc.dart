@@ -13,28 +13,26 @@ class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
     on<_GetPokemons>(_onGetPokemons);
   }
 
-  String _nextUrl = 'https://pokeapi.co/api/v2/pokemon';
+  String? _nextUrl = 'https://pokeapi.co/api/v2/pokemon';
   final _pokemons = <Pokemon>{};
-  int _pokemonsLenght = 0;
 
   void _onGetPokemons(
     _GetPokemons event,
     Emitter<PokemonListState> emit,
   ) async {
-    if (_pokemons.isNotEmpty && _pokemons.length >= _pokemonsLenght) {
+    if (_nextUrl == null) {
       return;
     }
 
     emit(const PokemonListState.loading());
 
-    final result = await PokedexUsecases.getPokemons(_nextUrl);
+    final result = await PokedexUsecases.getPokemons(_nextUrl!);
 
     result.fold(
       (l) => emit(PokemonListState.error(l)),
       (r) {
         _pokemons.addAll(r.results ?? []);
-        _nextUrl = r.next ?? _nextUrl;
-        _pokemonsLenght = r.count ?? 0;
+        _nextUrl = r.next;
 
         emit(PokemonListState.loaded(_pokemons.toList()));
       },
@@ -44,8 +42,10 @@ class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
   @override
   Future<void> close() async {
     for (var element in _pokemons) {
-      await element.close();
+      await element.detailBloc.close();
     }
+
+    _pokemons.clear();
     return super.close();
   }
 }

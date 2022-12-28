@@ -8,8 +8,7 @@ class PokemonDetailsState with _$PokemonDetailsState {
     required PokemonDetails pokemonDetails,
     required File? svgFile,
     required File? imageFile,
-    required PaletteGenerator? paletteSvg,
-    required PaletteGenerator? paletteImage,
+    required PaletteGenerator? palette,
   }) = _Loaded;
   const factory PokemonDetailsState.error(Failure failure) = _Error;
 }

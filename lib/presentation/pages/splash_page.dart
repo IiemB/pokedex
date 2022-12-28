@@ -17,7 +17,7 @@ class SplashPage extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(toolbarHeight: 1),
       body: Center(
         child: Assets.images.icon.image(),
       ),

@@ -43,8 +43,7 @@ class PokemonDetailsBloc
     await result.fold(
       (l) async => emit(PokemonDetailsState.error(l)),
       (r) async {
-        PaletteGenerator? paletteSvg;
-        PaletteGenerator? paletteImage;
+        PaletteGenerator? palette;
         File? svgFile;
         File? imageFile;
 
@@ -53,21 +52,21 @@ class PokemonDetailsBloc
         );
 
         if (svgFile != null) {
-          paletteSvg = await PaletteGenerator.fromImageProvider(
+          palette = await PaletteGenerator.fromImageProvider(
             Svg(svgFile.path, source: SvgSource.file),
           );
         }
 
-        if (svgFile != null && paletteSvg != null) {
+        if (svgFile != null && palette != null) {
           emit(
             PokemonDetailsState.loaded(
               pokemonDetails: r,
               svgFile: svgFile,
               imageFile: imageFile,
-              paletteSvg: paletteSvg,
-              paletteImage: paletteImage,
+              palette: palette,
             ),
           );
+
           return;
         }
 
@@ -76,31 +75,7 @@ class PokemonDetailsBloc
         );
 
         if (imageFile != null) {
-          paletteImage = await PaletteGenerator.fromImageProvider(
-            FileImage(imageFile),
-          );
-        }
-
-        if (imageFile != null && paletteImage != null) {
-          emit(
-            PokemonDetailsState.loaded(
-              pokemonDetails: r,
-              svgFile: svgFile,
-              imageFile: imageFile,
-              paletteSvg: paletteSvg,
-              paletteImage: paletteImage,
-            ),
-          );
-          return;
-        }
-
-        imageFile = await CacheManager.getCacheFile(
-          r.sprites?.frontDefault ??
-              r.sprites?.versions?.generationViii?.icons?.frontDefault,
-        );
-
-        if (imageFile != null) {
-          paletteImage = await PaletteGenerator.fromImageProvider(
+          palette = await PaletteGenerator.fromImageProvider(
             FileImage(imageFile),
           );
         }
@@ -110,8 +85,7 @@ class PokemonDetailsBloc
             pokemonDetails: r,
             svgFile: svgFile,
             imageFile: imageFile,
-            paletteSvg: paletteSvg,
-            paletteImage: paletteImage,
+            palette: palette,
           ),
         );
       },

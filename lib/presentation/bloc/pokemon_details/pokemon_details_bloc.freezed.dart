@@ -225,12 +225,8 @@ mixin _$PokemonDetailsState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            PokemonDetails pokemonDetails,
-            File? svgFile,
-            File? imageFile,
-            PaletteGenerator? paletteSvg,
-            PaletteGenerator? paletteImage)
+    required TResult Function(PokemonDetails pokemonDetails, File? svgFile,
+            File? imageFile, PaletteGenerator? palette)
         loaded,
     required TResult Function(Failure failure) error,
   }) =>
@@ -239,12 +235,8 @@ mixin _$PokemonDetailsState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            PokemonDetails pokemonDetails,
-            File? svgFile,
-            File? imageFile,
-            PaletteGenerator? paletteSvg,
-            PaletteGenerator? paletteImage)?
+    TResult? Function(PokemonDetails pokemonDetails, File? svgFile,
+            File? imageFile, PaletteGenerator? palette)?
         loaded,
     TResult? Function(Failure failure)? error,
   }) =>
@@ -253,12 +245,8 @@ mixin _$PokemonDetailsState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            PokemonDetails pokemonDetails,
-            File? svgFile,
-            File? imageFile,
-            PaletteGenerator? paletteSvg,
-            PaletteGenerator? paletteImage)?
+    TResult Function(PokemonDetails pokemonDetails, File? svgFile,
+            File? imageFile, PaletteGenerator? palette)?
         loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
@@ -348,12 +336,8 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            PokemonDetails pokemonDetails,
-            File? svgFile,
-            File? imageFile,
-            PaletteGenerator? paletteSvg,
-            PaletteGenerator? paletteImage)
+    required TResult Function(PokemonDetails pokemonDetails, File? svgFile,
+            File? imageFile, PaletteGenerator? palette)
         loaded,
     required TResult Function(Failure failure) error,
   }) {
@@ -365,12 +349,8 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            PokemonDetails pokemonDetails,
-            File? svgFile,
-            File? imageFile,
-            PaletteGenerator? paletteSvg,
-            PaletteGenerator? paletteImage)?
+    TResult? Function(PokemonDetails pokemonDetails, File? svgFile,
+            File? imageFile, PaletteGenerator? palette)?
         loaded,
     TResult? Function(Failure failure)? error,
   }) {
@@ -382,12 +362,8 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            PokemonDetails pokemonDetails,
-            File? svgFile,
-            File? imageFile,
-            PaletteGenerator? paletteSvg,
-            PaletteGenerator? paletteImage)?
+    TResult Function(PokemonDetails pokemonDetails, File? svgFile,
+            File? imageFile, PaletteGenerator? palette)?
         loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
@@ -479,12 +455,8 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            PokemonDetails pokemonDetails,
-            File? svgFile,
-            File? imageFile,
-            PaletteGenerator? paletteSvg,
-            PaletteGenerator? paletteImage)
+    required TResult Function(PokemonDetails pokemonDetails, File? svgFile,
+            File? imageFile, PaletteGenerator? palette)
         loaded,
     required TResult Function(Failure failure) error,
   }) {
@@ -496,12 +468,8 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            PokemonDetails pokemonDetails,
-            File? svgFile,
-            File? imageFile,
-            PaletteGenerator? paletteSvg,
-            PaletteGenerator? paletteImage)?
+    TResult? Function(PokemonDetails pokemonDetails, File? svgFile,
+            File? imageFile, PaletteGenerator? palette)?
         loaded,
     TResult? Function(Failure failure)? error,
   }) {
@@ -513,12 +481,8 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            PokemonDetails pokemonDetails,
-            File? svgFile,
-            File? imageFile,
-            PaletteGenerator? paletteSvg,
-            PaletteGenerator? paletteImage)?
+    TResult Function(PokemonDetails pokemonDetails, File? svgFile,
+            File? imageFile, PaletteGenerator? palette)?
         loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
@@ -580,8 +544,7 @@ abstract class _$$_LoadedCopyWith<$Res> {
       {PokemonDetails pokemonDetails,
       File? svgFile,
       File? imageFile,
-      PaletteGenerator? paletteSvg,
-      PaletteGenerator? paletteImage});
+      PaletteGenerator? palette});
 
   $PokemonDetailsCopyWith<$Res> get pokemonDetails;
 }
@@ -599,8 +562,7 @@ class __$$_LoadedCopyWithImpl<$Res>
     Object? pokemonDetails = null,
     Object? svgFile = freezed,
     Object? imageFile = freezed,
-    Object? paletteSvg = freezed,
-    Object? paletteImage = freezed,
+    Object? palette = freezed,
   }) {
     return _then(_$_Loaded(
       pokemonDetails: null == pokemonDetails
@@ -615,13 +577,9 @@ class __$$_LoadedCopyWithImpl<$Res>
           ? _value.imageFile
           : imageFile // ignore: cast_nullable_to_non_nullable
               as File?,
-      paletteSvg: freezed == paletteSvg
-          ? _value.paletteSvg
-          : paletteSvg // ignore: cast_nullable_to_non_nullable
-              as PaletteGenerator?,
-      paletteImage: freezed == paletteImage
-          ? _value.paletteImage
-          : paletteImage // ignore: cast_nullable_to_non_nullable
+      palette: freezed == palette
+          ? _value.palette
+          : palette // ignore: cast_nullable_to_non_nullable
               as PaletteGenerator?,
     ));
   }
@@ -642,8 +600,7 @@ class _$_Loaded implements _Loaded {
       {required this.pokemonDetails,
       required this.svgFile,
       required this.imageFile,
-      required this.paletteSvg,
-      required this.paletteImage});
+      required this.palette});
 
   @override
   final PokemonDetails pokemonDetails;
@@ -652,13 +609,11 @@ class _$_Loaded implements _Loaded {
   @override
   final File? imageFile;
   @override
-  final PaletteGenerator? paletteSvg;
-  @override
-  final PaletteGenerator? paletteImage;
+  final PaletteGenerator? palette;
 
   @override
   String toString() {
-    return 'PokemonDetailsState.loaded(pokemonDetails: $pokemonDetails, svgFile: $svgFile, imageFile: $imageFile, paletteSvg: $paletteSvg, paletteImage: $paletteImage)';
+    return 'PokemonDetailsState.loaded(pokemonDetails: $pokemonDetails, svgFile: $svgFile, imageFile: $imageFile, palette: $palette)';
   }
 
   @override
@@ -671,15 +626,12 @@ class _$_Loaded implements _Loaded {
             (identical(other.svgFile, svgFile) || other.svgFile == svgFile) &&
             (identical(other.imageFile, imageFile) ||
                 other.imageFile == imageFile) &&
-            (identical(other.paletteSvg, paletteSvg) ||
-                other.paletteSvg == paletteSvg) &&
-            (identical(other.paletteImage, paletteImage) ||
-                other.paletteImage == paletteImage));
+            (identical(other.palette, palette) || other.palette == palette));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, pokemonDetails, svgFile,
-      imageFile, paletteSvg, paletteImage);
+  int get hashCode =>
+      Object.hash(runtimeType, pokemonDetails, svgFile, imageFile, palette);
 
   @JsonKey(ignore: true)
   @override
@@ -692,16 +644,12 @@ class _$_Loaded implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            PokemonDetails pokemonDetails,
-            File? svgFile,
-            File? imageFile,
-            PaletteGenerator? paletteSvg,
-            PaletteGenerator? paletteImage)
+    required TResult Function(PokemonDetails pokemonDetails, File? svgFile,
+            File? imageFile, PaletteGenerator? palette)
         loaded,
     required TResult Function(Failure failure) error,
   }) {
-    return loaded(pokemonDetails, svgFile, imageFile, paletteSvg, paletteImage);
+    return loaded(pokemonDetails, svgFile, imageFile, palette);
   }
 
   @override
@@ -709,17 +657,12 @@ class _$_Loaded implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            PokemonDetails pokemonDetails,
-            File? svgFile,
-            File? imageFile,
-            PaletteGenerator? paletteSvg,
-            PaletteGenerator? paletteImage)?
+    TResult? Function(PokemonDetails pokemonDetails, File? svgFile,
+            File? imageFile, PaletteGenerator? palette)?
         loaded,
     TResult? Function(Failure failure)? error,
   }) {
-    return loaded?.call(
-        pokemonDetails, svgFile, imageFile, paletteSvg, paletteImage);
+    return loaded?.call(pokemonDetails, svgFile, imageFile, palette);
   }
 
   @override
@@ -727,19 +670,14 @@ class _$_Loaded implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            PokemonDetails pokemonDetails,
-            File? svgFile,
-            File? imageFile,
-            PaletteGenerator? paletteSvg,
-            PaletteGenerator? paletteImage)?
+    TResult Function(PokemonDetails pokemonDetails, File? svgFile,
+            File? imageFile, PaletteGenerator? palette)?
         loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(
-          pokemonDetails, svgFile, imageFile, paletteSvg, paletteImage);
+      return loaded(pokemonDetails, svgFile, imageFile, palette);
     }
     return orElse();
   }
@@ -787,14 +725,12 @@ abstract class _Loaded implements PokemonDetailsState {
       {required final PokemonDetails pokemonDetails,
       required final File? svgFile,
       required final File? imageFile,
-      required final PaletteGenerator? paletteSvg,
-      required final PaletteGenerator? paletteImage}) = _$_Loaded;
+      required final PaletteGenerator? palette}) = _$_Loaded;
 
   PokemonDetails get pokemonDetails;
   File? get svgFile;
   File? get imageFile;
-  PaletteGenerator? get paletteSvg;
-  PaletteGenerator? get paletteImage;
+  PaletteGenerator? get palette;
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -864,12 +800,8 @@ class _$_Error implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            PokemonDetails pokemonDetails,
-            File? svgFile,
-            File? imageFile,
-            PaletteGenerator? paletteSvg,
-            PaletteGenerator? paletteImage)
+    required TResult Function(PokemonDetails pokemonDetails, File? svgFile,
+            File? imageFile, PaletteGenerator? palette)
         loaded,
     required TResult Function(Failure failure) error,
   }) {
@@ -881,12 +813,8 @@ class _$_Error implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            PokemonDetails pokemonDetails,
-            File? svgFile,
-            File? imageFile,
-            PaletteGenerator? paletteSvg,
-            PaletteGenerator? paletteImage)?
+    TResult? Function(PokemonDetails pokemonDetails, File? svgFile,
+            File? imageFile, PaletteGenerator? palette)?
         loaded,
     TResult? Function(Failure failure)? error,
   }) {
@@ -898,12 +826,8 @@ class _$_Error implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            PokemonDetails pokemonDetails,
-            File? svgFile,
-            File? imageFile,
-            PaletteGenerator? paletteSvg,
-            PaletteGenerator? paletteImage)?
+    TResult Function(PokemonDetails pokemonDetails, File? svgFile,
+            File? imageFile, PaletteGenerator? palette)?
         loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),

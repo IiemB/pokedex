@@ -17,28 +17,25 @@ class AppDio with DioMixin implements Dio {
 
     this.options = options;
 
-    interceptors.add(
-      InterceptorsWrapper(
-        onRequest: (options, handler) async {
-          if (kDebugMode) {
+    if (kDebugMode) {
+      interceptors.add(
+        InterceptorsWrapper(
+          onRequest: (options, handler) {
             log('onRequest : ${options.uri}');
-          }
 
-          handler.next(options);
-        },
-        onResponse:
-            (Response response, ResponseInterceptorHandler handler) async {
-          if (kDebugMode) {
+            handler.next(options);
+          },
+          onResponse: (response, handler) {
             log(
               'onResponse ${response.statusCode} : ${response.requestOptions.uri}',
             );
-          }
-          handler.next(response);
-        },
-        onError: (error, handler) => handler.next(error),
-      ),
-    );
-    if (kDebugMode) {
+
+            handler.next(response);
+          },
+          onError: (error, handler) => handler.next(error),
+        ),
+      );
+
       interceptors.add(
         LogInterceptor(
           responseBody: true,

@@ -12,8 +12,10 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i2;
+import 'package:flutter/foundation.dart' as _i4;
 import 'package:flutter/material.dart' as _i3;
 
+import '../data/data.dart' as _i5;
 import '../presentation/presentation.dart' as _i1;
 
 class AppRouter extends _i2.RootStackRouter {
@@ -34,6 +36,16 @@ class AppRouter extends _i2.RootStackRouter {
         child: const _i1.HomePage(),
       );
     },
+    PokemonDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<PokemonDetailsRouteArgs>();
+      return _i2.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: _i1.PokemonDetailsPage(
+          key: args.key,
+          pokemon: args.pokemon,
+        ),
+      );
+    },
   };
 
   @override
@@ -45,6 +57,10 @@ class AppRouter extends _i2.RootStackRouter {
         _i2.RouteConfig(
           HomeRoute.name,
           path: 'home',
+        ),
+        _i2.RouteConfig(
+          PokemonDetailsRoute.name,
+          path: 'pokemon-details',
         ),
       ];
 }
@@ -71,4 +87,38 @@ class HomeRoute extends _i2.PageRouteInfo<void> {
         );
 
   static const String name = 'HomeRoute';
+}
+
+/// generated route for
+/// [_i1.PokemonDetailsPage]
+class PokemonDetailsRoute extends _i2.PageRouteInfo<PokemonDetailsRouteArgs> {
+  PokemonDetailsRoute({
+    _i4.Key? key,
+    required _i5.Pokemon pokemon,
+  }) : super(
+          PokemonDetailsRoute.name,
+          path: 'pokemon-details',
+          args: PokemonDetailsRouteArgs(
+            key: key,
+            pokemon: pokemon,
+          ),
+        );
+
+  static const String name = 'PokemonDetailsRoute';
+}
+
+class PokemonDetailsRouteArgs {
+  const PokemonDetailsRouteArgs({
+    this.key,
+    required this.pokemon,
+  });
+
+  final _i4.Key? key;
+
+  final _i5.Pokemon pokemon;
+
+  @override
+  String toString() {
+    return 'PokemonDetailsRouteArgs{key: $key, pokemon: $pokemon}';
+  }
 }
