@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokedex/core/core.dart';
 import 'package:pokedex/presentation/presentation.dart';
-import 'package:pokedex/utils/utils.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = 'home';
@@ -64,9 +64,7 @@ class _HomePageState extends State<HomePage> {
                   actions: [
                     IconButton(
                       tooltip: 'Settings',
-                      onPressed: () => context.showBottomSheet(
-                        builder: (context) => const SettingsDialogue(),
-                      ),
+                      onPressed: () => router.push(const SettingsRoute()),
                       icon: const Icon(Icons.settings),
                     )
                   ],

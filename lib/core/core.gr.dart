@@ -46,6 +46,12 @@ class AppRouter extends _i2.RootStackRouter {
         ),
       );
     },
+    SettingsRoute.name: (routeData) {
+      return _i2.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i1.SettingsPage(),
+      );
+    },
   };
 
   @override
@@ -61,6 +67,10 @@ class AppRouter extends _i2.RootStackRouter {
         _i2.RouteConfig(
           PokemonDetailsRoute.name,
           path: 'pokemon-details',
+        ),
+        _i2.RouteConfig(
+          SettingsRoute.name,
+          path: 'settings',
         ),
       ];
 }
@@ -121,4 +131,16 @@ class PokemonDetailsRouteArgs {
   String toString() {
     return 'PokemonDetailsRouteArgs{key: $key, pokemon: $pokemon}';
   }
+}
+
+/// generated route for
+/// [_i1.SettingsPage]
+class SettingsRoute extends _i2.PageRouteInfo<void> {
+  const SettingsRoute()
+      : super(
+          SettingsRoute.name,
+          path: 'settings',
+        );
+
+  static const String name = 'SettingsRoute';
 }

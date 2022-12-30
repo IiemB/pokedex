@@ -16,6 +16,10 @@ part of 'core.dart';
       page: PokemonDetailsPage,
       path: PokemonDetailsPage.routeName,
     ),
+    AutoRoute(
+      page: SettingsPage,
+      path: SettingsPage.routeName,
+    ),
   ],
 )
 class $AppRouter {}

@@ -16,6 +16,9 @@ class PokemonBaseStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final titleW = context.widthPercent(10);
+    final valueW = context.width - context.widthPercent(30);
+
     return BlocBuilder<StatsAnimatorCubit, List<Stat>>(
       bloc: StatsAnimatorCubit(stats)..animate(),
       builder: (context, state) => Column(
@@ -35,8 +38,6 @@ class PokemonBaseStats extends StatelessWidget {
               .map(
                 (e) {
                   final backgroundColor = Pokemon.getRandomColor;
-                  final titleW = context.widthPercent(10);
-                  final valueW = context.width - context.widthPercent(30);
 
                   var statValue = e.baseStat ?? 10;
                   if (statValue > 100) {
