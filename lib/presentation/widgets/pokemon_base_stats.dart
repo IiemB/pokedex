@@ -19,88 +19,90 @@ class PokemonBaseStats extends StatelessWidget {
     final titleW = context.widthPercent(10);
     final valueW = context.width - context.widthPercent(30);
 
-    return BlocBuilder<StatsAnimatorCubit, List<Stat>>(
-      bloc: StatsAnimatorCubit(stats)..animate(),
-      builder: (context, state) => Column(
-        children: [
-          Text(
-            'Base Stats',
-            textAlign: TextAlign.center,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: context.theme.colorScheme.onBackground,
-              fontWeight: FontWeight.w600,
-              fontSize: 24.sp,
+    return BlocProvider(
+      create: (context) => StatsAnimatorCubit(stats)..animate(),
+      child: BlocBuilder<StatsAnimatorCubit, List<Stat>>(
+        builder: (context, state) => Column(
+          children: [
+            Text(
+              'Base Stats',
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: context.theme.colorScheme.onBackground,
+                fontWeight: FontWeight.w600,
+                fontSize: 24.sp,
+              ),
             ),
-          ),
-          ...state
-              .map(
-                (e) {
-                  final backgroundColor = Pokemon.getRandomColor;
+            ...state
+                .map(
+                  (e) {
+                    final backgroundColor = Pokemon.getRandomColor;
 
-                  var statValue = e.baseStat ?? 10;
-                  if (statValue > 100) {
-                    statValue = 100;
-                  }
+                    var statValue = e.baseStat ?? 10;
+                    if (statValue > 100) {
+                      statValue = 100;
+                    }
 
-                  final witdthValue = valueW * ((statValue) / 100);
+                    final witdthValue = valueW * ((statValue) / 100);
 
-                  return Row(
-                    children: [
-                      SizedBox(
-                        width: titleW,
-                        child: Text(
-                          '${e.statDetail?.shortName}',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: context.theme.colorScheme.onBackground
-                                .withOpacity(0.8),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16.sp,
+                    return Row(
+                      children: [
+                        SizedBox(
+                          width: titleW,
+                          child: Text(
+                            '${e.statDetail?.shortName}',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: context.theme.colorScheme.onBackground
+                                  .withOpacity(0.8),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16.sp,
+                            ),
                           ),
                         ),
-                      ),
-                      const Gap(8),
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 500),
-                        height: 16.sp,
-                        width: witdthValue,
-                        decoration: BoxDecoration(
-                          color: backgroundColor,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(16),
+                        const Gap(8),
+                        AnimatedContainer(
+                          duration: const Duration(milliseconds: 500),
+                          height: 16.sp,
+                          width: witdthValue,
+                          decoration: BoxDecoration(
+                            color: backgroundColor,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(16),
+                            ),
+                          ),
+                          child: Text(
+                            ''.toUpperCase(),
+                            textAlign: TextAlign.center,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: backgroundColor.getContrastColor
+                                  .withOpacity(0.8),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 12.sp,
+                            ),
                           ),
                         ),
-                        child: Text(
-                          '$statValue'.toUpperCase(),
-                          textAlign: TextAlign.center,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: backgroundColor.getContrastColor
-                                .withOpacity(0.8),
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12.sp,
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              )
-              .map(
-                (e) => Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 16,
+                      ],
+                    );
+                  },
+                )
+                .map(
+                  (e) => Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 8,
+                      horizontal: 16,
+                    ),
+                    child: e,
                   ),
-                  child: e,
-                ),
-              )
-              .toList(),
-        ],
+                )
+                .toList(),
+          ],
+        ),
       ),
     );
   }

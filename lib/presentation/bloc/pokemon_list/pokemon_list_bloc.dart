@@ -4,9 +4,9 @@ import 'package:pokedex/common/common.dart';
 import 'package:pokedex/data/data.dart';
 import 'package:pokedex/domain/domain.dart';
 
+part 'pokemon_list_bloc.freezed.dart';
 part 'pokemon_list_event.dart';
 part 'pokemon_list_state.dart';
-part 'pokemon_list_bloc.freezed.dart';
 
 class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
   PokemonListBloc() : super(const PokemonListState.initial()) {
@@ -20,7 +20,11 @@ class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
     _GetPokemons event,
     Emitter<PokemonListState> emit,
   ) async {
-    if (_nextUrl == null) {
+    if (_nextUrl == null ||
+        state.maybeMap(
+          orElse: () => false,
+          loading: (value) => true,
+        )) {
       return;
     }
 
@@ -34,18 +38,17 @@ class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
         _pokemons.addAll(r.results ?? []);
         _nextUrl = r.next;
 
-        emit(PokemonListState.loaded(_pokemons.toList()));
+        emit(PokemonListState.loaded(_pokemons.toList(), nextUrl: _nextUrl));
       },
     );
   }
 
   @override
   Future<void> close() async {
-    for (var element in _pokemons) {
-      await element.detailBloc.close();
-    }
+    Future.wait([
+      for (var element in _pokemons) element.detailBloc.close(),
+    ]).whenComplete(_pokemons.clear);
 
-    _pokemons.clear();
     return super.close();
   }
 }

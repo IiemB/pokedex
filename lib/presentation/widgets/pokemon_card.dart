@@ -19,7 +19,7 @@ class PokemonCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PokemonDetailsBloc, PokemonDetailsState>(
       bloc: pokemon.detailBloc
-        ..add(PokemonDetailsEvent.getPokemonDetail(pokemon.url)),
+        ..add(const PokemonDetailsEvent.getPokemonDetail()),
       builder: (context, state) => Padding(
         padding: const EdgeInsets.all(4.0),
         child: Card(

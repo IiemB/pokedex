@@ -32,12 +32,14 @@ class _SettingsPageState extends State<SettingsPage> {
             child: ListTile(
               onTap: () => _popUpMenuThemeKey.currentState?.showButtonMenu(),
               title: const Text('App theme'),
-              trailing: BlocBuilder<ThemeCubit, ThemeState>(
+              trailing: BlocBuilder<SettingsCubit, SettingsState>(
+                buildWhen: (previous, current) =>
+                    previous.themeState != current.themeState,
                 builder: (context, state) => PopupMenuButton<ThemeState>(
                   key: _popUpMenuThemeKey,
-                  initialValue: state,
-                  onSelected: (value) =>
-                      BlocProvider.of<ThemeCubit>(context).update(state: value),
+                  initialValue: state.themeState,
+                  onSelected: (value) => BlocProvider.of<SettingsCubit>(context)
+                      .updateTheme(value),
                   itemBuilder: (context) => ThemeState.values
                       .map(
                         (e) => PopupMenuItem<ThemeState>(
@@ -46,7 +48,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         ),
                       )
                       .toList(),
-                  child: Text(state.themeName),
+                  child: Text(state.themeState.themeName),
                 ),
               ),
             ),
@@ -55,13 +57,15 @@ class _SettingsPageState extends State<SettingsPage> {
             child: ListTile(
               onTap: () => _popUpMenuGridKey.currentState?.showButtonMenu(),
               title: const Text('Grid count'),
-              trailing: BlocBuilder<GridCountCubit, int>(
+              trailing: BlocBuilder<SettingsCubit, SettingsState>(
+                buildWhen: (previous, current) =>
+                    previous.gridCount != current.gridCount,
                 builder: (context, state) => PopupMenuButton<int>(
                   key: _popUpMenuGridKey,
-                  initialValue: state,
-                  onSelected: (value) =>
-                      BlocProvider.of<GridCountCubit>(context).update(value),
-                  itemBuilder: (context) => [1, 2, 3]
+                  initialValue: state.gridCount,
+                  onSelected: (value) => BlocProvider.of<SettingsCubit>(context)
+                      .updateGridCount(value),
+                  itemBuilder: (context) => [1, 2]
                       .map(
                         (e) => PopupMenuItem<int>(
                           value: e,

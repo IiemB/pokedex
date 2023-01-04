@@ -16,20 +16,19 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PokemonDetailsEvent {
-  String? get url => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? url) getPokemonDetail,
+    required TResult Function() getPokemonDetail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? url)? getPokemonDetail,
+    TResult? Function()? getPokemonDetail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? url)? getPokemonDetail,
+    TResult Function()? getPokemonDetail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -49,10 +48,6 @@ mixin _$PokemonDetailsEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $PokemonDetailsEventCopyWith<PokemonDetailsEvent> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -60,8 +55,6 @@ abstract class $PokemonDetailsEventCopyWith<$Res> {
   factory $PokemonDetailsEventCopyWith(
           PokemonDetailsEvent value, $Res Function(PokemonDetailsEvent) then) =
       _$PokemonDetailsEventCopyWithImpl<$Res, PokemonDetailsEvent>;
-  @useResult
-  $Res call({String? url});
 }
 
 /// @nodoc
@@ -73,30 +66,13 @@ class _$PokemonDetailsEventCopyWithImpl<$Res, $Val extends PokemonDetailsEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? url = freezed,
-  }) {
-    return _then(_value.copyWith(
-      url: freezed == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$_GetPokemonDetailCopyWith<$Res>
-    implements $PokemonDetailsEventCopyWith<$Res> {
+abstract class _$$_GetPokemonDetailCopyWith<$Res> {
   factory _$$_GetPokemonDetailCopyWith(
           _$_GetPokemonDetail value, $Res Function(_$_GetPokemonDetail) then) =
       __$$_GetPokemonDetailCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String? url});
 }
 
 /// @nodoc
@@ -106,75 +82,51 @@ class __$$_GetPokemonDetailCopyWithImpl<$Res>
   __$$_GetPokemonDetailCopyWithImpl(
       _$_GetPokemonDetail _value, $Res Function(_$_GetPokemonDetail) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? url = freezed,
-  }) {
-    return _then(_$_GetPokemonDetail(
-      freezed == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_GetPokemonDetail implements _GetPokemonDetail {
-  const _$_GetPokemonDetail(this.url);
-
-  @override
-  final String? url;
+  const _$_GetPokemonDetail();
 
   @override
   String toString() {
-    return 'PokemonDetailsEvent.getPokemonDetail(url: $url)';
+    return 'PokemonDetailsEvent.getPokemonDetail()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_GetPokemonDetail &&
-            (identical(other.url, url) || other.url == url));
+        (other.runtimeType == runtimeType && other is _$_GetPokemonDetail);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, url);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_GetPokemonDetailCopyWith<_$_GetPokemonDetail> get copyWith =>
-      __$$_GetPokemonDetailCopyWithImpl<_$_GetPokemonDetail>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? url) getPokemonDetail,
+    required TResult Function() getPokemonDetail,
   }) {
-    return getPokemonDetail(url);
+    return getPokemonDetail();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? url)? getPokemonDetail,
+    TResult? Function()? getPokemonDetail,
   }) {
-    return getPokemonDetail?.call(url);
+    return getPokemonDetail?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? url)? getPokemonDetail,
+    TResult Function()? getPokemonDetail,
     required TResult orElse(),
   }) {
     if (getPokemonDetail != null) {
-      return getPokemonDetail(url);
+      return getPokemonDetail();
     }
     return orElse();
   }
@@ -209,14 +161,7 @@ class _$_GetPokemonDetail implements _GetPokemonDetail {
 }
 
 abstract class _GetPokemonDetail implements PokemonDetailsEvent {
-  const factory _GetPokemonDetail(final String? url) = _$_GetPokemonDetail;
-
-  @override
-  String? get url;
-  @override
-  @JsonKey(ignore: true)
-  _$$_GetPokemonDetailCopyWith<_$_GetPokemonDetail> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _GetPokemonDetail() = _$_GetPokemonDetail;
 }
 
 /// @nodoc

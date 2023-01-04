@@ -8,12 +8,13 @@ class Pokemon {
   Pokemon({
     String? name,
     this.url,
-  }) : name = '${name?.replaceAll('-', ' ')}'.capitalizeAllWords;
+  })  : name = '${name?.replaceAll('-', ' ')}'.capitalizeAllWords,
+        detailBloc = PokemonDetailsBloc(url);
 
   final String name;
   final String? url;
 
-  final detailBloc = PokemonDetailsBloc();
+  final PokemonDetailsBloc detailBloc;
 
   final optionColor = _palettes[Random().nextInt(_palettes.length)];
 

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
@@ -10,13 +11,15 @@ import 'package:pokedex/common/common.dart';
 import 'package:pokedex/data/data.dart';
 import 'package:pokedex/domain/domain.dart';
 
+part 'pokemon_details_bloc.freezed.dart';
 part 'pokemon_details_event.dart';
 part 'pokemon_details_state.dart';
-part 'pokemon_details_bloc.freezed.dart';
 
 class PokemonDetailsBloc
     extends Bloc<PokemonDetailsEvent, PokemonDetailsState> {
-  PokemonDetailsBloc() : super(const PokemonDetailsState.initial()) {
+  final String? url;
+
+  PokemonDetailsBloc(this.url) : super(const PokemonDetailsState.initial()) {
     on<_GetPokemonDetail>(_onGetPokemonDetail, transformer: droppable());
   }
 
@@ -32,7 +35,7 @@ class PokemonDetailsBloc
 
     emit(const PokemonDetailsState.loading());
 
-    final url = event.url;
+    final url = this.url;
 
     if (url == null) {
       return;
@@ -90,5 +93,11 @@ class PokemonDetailsBloc
         );
       },
     );
+  }
+
+  @override
+  Future<void> close() {
+    log('$url closed');
+    return super.close();
   }
 }

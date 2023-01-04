@@ -95,7 +95,7 @@ class CacheManager {
 
   Future<void> clearCache() async {
     try {
-      await DefaultCacheManager().emptyCache();
+      await _cacheManager.emptyCache();
     } catch (e) {
       log(e.toString());
     }
