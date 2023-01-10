@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pokedex/common/common.dart';
 
 part 'stat_detail.freezed.dart';
 part 'stat_detail.g.dart';
@@ -15,13 +16,14 @@ class StatDetail with _$StatDetail {
 }
 
 extension StatDetailExtension on StatDetail {
-  String? get shortName => {
-        'hp': 'hp',
-        'attack': 'atk',
-        'defense': 'def',
-        'special-attack': 'satk',
-        'special-defense': 'sdef',
-        'speed': 'spd'
-      }[name]
-          ?.toUpperCase();
+  PokemonStats get pokemonStat =>
+      {
+        'hp': PokemonStats.hp,
+        'attack': PokemonStats.attack,
+        'defense': PokemonStats.defense,
+        'special-attack': PokemonStats.spAtk,
+        'special-defense': PokemonStats.spDef,
+        'speed': PokemonStats.speed,
+      }[name] ??
+      PokemonStats.hp;
 }

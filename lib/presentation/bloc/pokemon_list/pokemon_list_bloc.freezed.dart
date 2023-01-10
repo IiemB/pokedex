@@ -16,19 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PokemonListEvent {
+  bool get force => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getPokemons,
+    required TResult Function(bool force) getPokemons,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getPokemons,
+    TResult? Function(bool force)? getPokemons,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getPokemons,
+    TResult Function(bool force)? getPokemons,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +49,10 @@ mixin _$PokemonListEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $PokemonListEventCopyWith<PokemonListEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -55,6 +60,8 @@ abstract class $PokemonListEventCopyWith<$Res> {
   factory $PokemonListEventCopyWith(
           PokemonListEvent value, $Res Function(PokemonListEvent) then) =
       _$PokemonListEventCopyWithImpl<$Res, PokemonListEvent>;
+  @useResult
+  $Res call({bool force});
 }
 
 /// @nodoc
@@ -66,13 +73,30 @@ class _$PokemonListEventCopyWithImpl<$Res, $Val extends PokemonListEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? force = null,
+  }) {
+    return _then(_value.copyWith(
+      force: null == force
+          ? _value.force
+          : force // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$_GetPokemonsCopyWith<$Res> {
+abstract class _$$_GetPokemonsCopyWith<$Res>
+    implements $PokemonListEventCopyWith<$Res> {
   factory _$$_GetPokemonsCopyWith(
           _$_GetPokemons value, $Res Function(_$_GetPokemons) then) =
       __$$_GetPokemonsCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({bool force});
 }
 
 /// @nodoc
@@ -82,51 +106,76 @@ class __$$_GetPokemonsCopyWithImpl<$Res>
   __$$_GetPokemonsCopyWithImpl(
       _$_GetPokemons _value, $Res Function(_$_GetPokemons) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? force = null,
+  }) {
+    return _then(_$_GetPokemons(
+      force: null == force
+          ? _value.force
+          : force // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_GetPokemons implements _GetPokemons {
-  const _$_GetPokemons();
+  const _$_GetPokemons({this.force = false});
+
+  @override
+  @JsonKey()
+  final bool force;
 
   @override
   String toString() {
-    return 'PokemonListEvent.getPokemons()';
+    return 'PokemonListEvent.getPokemons(force: $force)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_GetPokemons);
+        (other.runtimeType == runtimeType &&
+            other is _$_GetPokemons &&
+            (identical(other.force, force) || other.force == force));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, force);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetPokemonsCopyWith<_$_GetPokemons> get copyWith =>
+      __$$_GetPokemonsCopyWithImpl<_$_GetPokemons>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getPokemons,
+    required TResult Function(bool force) getPokemons,
   }) {
-    return getPokemons();
+    return getPokemons(force);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getPokemons,
+    TResult? Function(bool force)? getPokemons,
   }) {
-    return getPokemons?.call();
+    return getPokemons?.call(force);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getPokemons,
+    TResult Function(bool force)? getPokemons,
     required TResult orElse(),
   }) {
     if (getPokemons != null) {
-      return getPokemons();
+      return getPokemons(force);
     }
     return orElse();
   }
@@ -161,7 +210,14 @@ class _$_GetPokemons implements _GetPokemons {
 }
 
 abstract class _GetPokemons implements PokemonListEvent {
-  const factory _GetPokemons() = _$_GetPokemons;
+  const factory _GetPokemons({final bool force}) = _$_GetPokemons;
+
+  @override
+  bool get force;
+  @override
+  @JsonKey(ignore: true)
+  _$$_GetPokemonsCopyWith<_$_GetPokemons> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pokedex/common/common.dart';
@@ -10,7 +11,7 @@ part 'pokemon_list_state.dart';
 
 class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
   PokemonListBloc() : super(const PokemonListState.initial()) {
-    on<_GetPokemons>(_onGetPokemons);
+    on<_GetPokemons>(_onGetPokemons, transformer: droppable());
   }
 
   String? _nextUrl = 'https://pokeapi.co/api/v2/pokemon';
@@ -20,11 +21,11 @@ class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
     _GetPokemons event,
     Emitter<PokemonListState> emit,
   ) async {
-    if (_nextUrl == null ||
-        state.maybeMap(
-          orElse: () => false,
-          loading: (value) => true,
-        )) {
+    if (event.force) {
+      _nextUrl = 'https://pokeapi.co/api/v2/pokemon';
+    }
+
+    if (_nextUrl == null) {
       return;
     }
 
@@ -37,6 +38,11 @@ class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
       (r) {
         _pokemons.addAll(r.results ?? []);
         _nextUrl = r.next;
+
+        if (_nextUrl != null) {
+          add(const PokemonListEvent.getPokemons());
+          return;
+        }
 
         emit(PokemonListState.loaded(_pokemons.toList(), nextUrl: _nextUrl));
       },

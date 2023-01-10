@@ -27,9 +27,10 @@ class PokemonDetailsBloc
     _GetPokemonDetail event,
     Emitter<PokemonDetailsState> emit,
   ) async {
-    final isLoaded = state.mapOrNull(loaded: (value) => true);
+    final isBusy =
+        state.mapOrNull(loaded: (value) => true, loading: (value) => true);
 
-    if (isLoaded == true) {
+    if (isBusy == true) {
       return;
     }
 

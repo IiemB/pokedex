@@ -17,7 +17,7 @@ class AppDio with DioMixin implements Dio {
 
     this.options = options;
 
-    if (kDebugMode) {
+    if (kDebugMode && false) {
       interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {

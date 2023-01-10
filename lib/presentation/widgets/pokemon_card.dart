@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pokedex/common/common.dart';
 import 'package:pokedex/core/core.dart';
 import 'package:pokedex/data/data.dart';
 import 'package:pokedex/presentation/presentation.dart';
@@ -9,10 +10,12 @@ import 'package:pokedex/utils/utils.dart';
 
 class PokemonCard extends StatelessWidget {
   final Pokemon pokemon;
+  final int index;
 
   const PokemonCard({
     super.key,
     required this.pokemon,
+    required this.index,
   });
 
   @override
@@ -29,9 +32,13 @@ class PokemonCard extends StatelessWidget {
                 value.palette?.dominantColor?.color ?? pokemon.optionColor,
           ),
           child: InkWell(
-            onTap: () => state.mapOrNull(
-              loaded: (value) =>
-                  router.push(PokemonDetailsRoute(pokemon: pokemon)),
+            onTap: () => state.mapOrNull<void>(
+              loaded: (value) {
+                FocusScope.of(context).unfocus();
+                router.push(
+                  PokemonDetailsRoute(currentIndex: index, pokemon: pokemon),
+                );
+              },
             ),
             child: Stack(
               alignment: Alignment.center,
@@ -39,6 +46,7 @@ class PokemonCard extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.fromLTRB(16, 16, 16, 32.sp),
                   child: Hero(
+                    key: ValueKey(pokemon),
                     tag: pokemon.name,
                     child: state.maybeMap(
                       orElse: () => Assets.images.icon.image(),
@@ -98,7 +106,7 @@ class PokemonCardEmpty extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Pokemon.getRandomColor,
+      color: getRandomColor,
       child: Padding(
         padding: EdgeInsets.fromLTRB(20, 20, 20, 32.sp + 4),
         child: Assets.images.icon.image(),

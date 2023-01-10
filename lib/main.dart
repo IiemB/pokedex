@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, _) => MultiBlocProvider(
         providers: [
+          BlocProvider(create: (context) => PokemonListBloc()),
           BlocProvider(create: (context) => SettingsCubit()),
         ],
         child: BlocBuilder<SettingsCubit, SettingsState>(

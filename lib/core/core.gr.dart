@@ -12,7 +12,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:flutter/cupertino.dart' as _i4;
+import 'package:flutter/foundation.dart' as _i4;
 import 'package:flutter/material.dart' as _i3;
 
 import '../data/data.dart' as _i5;
@@ -42,6 +42,7 @@ class AppRouter extends _i2.RootStackRouter {
         routeData: routeData,
         child: _i1.PokemonDetailsPage(
           key: args.key,
+          currentIndex: args.currentIndex,
           pokemon: args.pokemon,
         ),
       );
@@ -104,12 +105,14 @@ class HomeRoute extends _i2.PageRouteInfo<void> {
 class PokemonDetailsRoute extends _i2.PageRouteInfo<PokemonDetailsRouteArgs> {
   PokemonDetailsRoute({
     _i4.Key? key,
+    required int currentIndex,
     required _i5.Pokemon pokemon,
   }) : super(
           PokemonDetailsRoute.name,
           path: 'pokemon-details',
           args: PokemonDetailsRouteArgs(
             key: key,
+            currentIndex: currentIndex,
             pokemon: pokemon,
           ),
         );
@@ -120,16 +123,19 @@ class PokemonDetailsRoute extends _i2.PageRouteInfo<PokemonDetailsRouteArgs> {
 class PokemonDetailsRouteArgs {
   const PokemonDetailsRouteArgs({
     this.key,
+    required this.currentIndex,
     required this.pokemon,
   });
 
   final _i4.Key? key;
 
+  final int currentIndex;
+
   final _i5.Pokemon pokemon;
 
   @override
   String toString() {
-    return 'PokemonDetailsRouteArgs{key: $key, pokemon: $pokemon}';
+    return 'PokemonDetailsRouteArgs{key: $key, currentIndex: $currentIndex, pokemon: $pokemon}';
   }
 }
 

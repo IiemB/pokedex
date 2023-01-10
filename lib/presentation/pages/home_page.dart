@@ -33,10 +33,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) =>
-              PokemonListBloc()..add(const PokemonListEvent.getPokemons()),
-        ),
         BlocProvider(create: (context) => SearchPokemonCubit()),
       ],
       child: Builder(
@@ -47,22 +43,7 @@ class _HomePageState extends State<HomePage> {
             radius: const Radius.circular(16),
             child: CustomScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              controller: _scrollController
-                ..addListener(() {
-                  final pokemonListBloc =
-                      BlocProvider.of<PokemonListBloc>(context);
-
-                  final isLoading = pokemonListBloc.state.maybeMap<bool>(
-                    orElse: () => false,
-                    loading: (value) => true,
-                  );
-
-                  if (_scrollController.offset ==
-                          _scrollController.position.maxScrollExtent &&
-                      !isLoading) {
-                    pokemonListBloc.add(const PokemonListEvent.getPokemons());
-                  }
-                }),
+              controller: _scrollController,
               slivers: [
                 BlocConsumer<SettingsCubit, SettingsState>(
                   buildWhen: (previous, current) =>
@@ -131,11 +112,6 @@ class _HomePageState extends State<HomePage> {
                           ..initPokemon(value.pokemons)
                           ..search(_searchController.text),
                         builder: (context, pokemons) {
-                          if (pokemons.length < 6) {
-                            BlocProvider.of<PokemonListBloc>(context)
-                                .add(const PokemonListEvent.getPokemons());
-                          }
-
                           if (pokemons.isEmpty) {
                             return SliverFillRemaining(
                               child: Center(
@@ -160,7 +136,12 @@ class _HomePageState extends State<HomePage> {
                             ),
                             delegate: SliverChildListDelegate(
                               pokemons
-                                  .map((e) => PokemonCard(pokemon: e))
+                                  .map(
+                                    (e) => PokemonCard(
+                                      pokemon: e,
+                                      index: value.pokemons.indexOf(e),
+                                    ),
+                                  )
                                   .toList(),
                             ),
                           );
