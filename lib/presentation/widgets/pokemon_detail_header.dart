@@ -6,12 +6,7 @@ import 'package:pokedex/presentation/presentation.dart';
 import 'package:pokedex/utils/utils.dart';
 
 class PokemonDetailHeader extends StatelessWidget {
-  const PokemonDetailHeader({
-    super.key,
-    required this.pageController,
-  });
-
-  final PageController pageController;
+  const PokemonDetailHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +36,7 @@ class PokemonDetailHeader extends StatelessWidget {
                 Text(
                   state.maybeMap(
                     orElse: () => '',
-                    loaded: (value) => '#${value.pokemonDetails.id}',
+                    loaded: (value) => '# ${value.pokemonDetails.id}',
                   ),
                   textAlign: TextAlign.center,
                   maxLines: 1,
@@ -64,52 +59,8 @@ class PokemonDetailHeader extends StatelessWidget {
                 bottom: Radius.circular(16),
               ),
             ),
-            flexibleSpace: FlexibleSpaceBar(
-              background: BlocBuilder<PokemonListBloc, PokemonListState>(
-                builder: (context, state) => state.maybeMap(
-                  orElse: () => Padding(
-                    padding: const EdgeInsets.fromLTRB(
-                      16,
-                      24 + kToolbarHeight,
-                      16,
-                      16,
-                    ),
-                    child: Assets.images.icon.image(),
-                  ),
-                  loaded: (value) => PageView.builder(
-                    allowImplicitScrolling: true,
-                    controller: pageController,
-                    itemCount: value.pokemons.length,
-                    onPageChanged: (index) {
-                      final pokemon = value.pokemons[index]
-                        ..detailBloc
-                            .add(const PokemonDetailsEvent.getPokemonDetail());
-
-                      if (index + 1 < value.pokemons.length) {
-                        value.pokemons[index + 1].detailBloc
-                            .add(const PokemonDetailsEvent.getPokemonDetail());
-                      }
-
-                      BlocProvider.of<PokemonSwitcherCubit>(
-                        context,
-                      ).switchPokemon(pokemon);
-                    },
-                    itemBuilder: (_, index) {
-                      final pokemon = value.pokemons[index];
-
-                      return Padding(
-                        padding: const EdgeInsets.fromLTRB(
-                          16,
-                          24 + kToolbarHeight,
-                          16,
-                          16,
-                        ),
-                        child: PokemonHeaderImage(pokemon: pokemon),
-                      );
-                    },
-                  ),
-                ),
-              ),
+            flexibleSpace: const FlexibleSpaceBar(
+              background: PokemonImagesCarousel(),
             ),
           );
         },

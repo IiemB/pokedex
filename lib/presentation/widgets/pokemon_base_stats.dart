@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 import 'package:pokedex/data/data.dart';
 import 'package:pokedex/presentation/presentation.dart';
 import 'package:pokedex/utils/utils.dart';
@@ -11,7 +10,7 @@ class PokemonBaseStats extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final valueW = context.width - context.widthPercent(25);
+    final valueW = context.width - context.widthPercent(30);
 
     return BlocBuilder<PokemonSwitcherCubit, Pokemon>(
       builder: (context, pokemon) =>
@@ -67,7 +66,7 @@ class PokemonBaseStats extends StatelessWidget {
                           .toList(),
                     ],
                   ),
-                  const Gap(16),
+                  const Spacer(),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

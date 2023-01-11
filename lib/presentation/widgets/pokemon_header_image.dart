@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:pokedex/data/data.dart';
 import 'package:pokedex/presentation/presentation.dart';
 import 'package:pokedex/utils/utils.dart';
@@ -17,34 +17,44 @@ class PokemonHeaderImage extends StatelessWidget {
     return BlocBuilder<PokemonDetailsBloc, PokemonDetailsState>(
       bloc: pokemon.detailBloc,
       builder: (context, pokemonDetailState) {
-        final image = pokemonDetailState.maybeMap(
-          orElse: () => Assets.images.icon.image(),
+        final image = pokemonDetailState.maybeMap<ImageProvider<Object>>(
+          orElse: () => AssetImage(Assets.images.icon.path),
           loaded: (value) {
             final svgFile = value.svgFile;
             final imageFile = value.imageFile;
 
             if (svgFile != null) {
-              return SvgPicture.file(svgFile);
+              return Svg(svgFile.path, source: SvgSource.file);
             }
 
             if (imageFile != null) {
-              return Image.file(imageFile);
+              return FileImage(imageFile);
             }
 
-            return Assets.images.icon.image();
+            return AssetImage(Assets.images.icon.path);
           },
         );
 
         return BlocBuilder<PokemonSwitcherCubit, Pokemon>(
           builder: (context, currentPokemon) {
             if (pokemon.name != currentPokemon.name) {
-              return image;
+              return BaseShimmer(
+                child: Image(
+                  image: image,
+                  color: Colors.black.withOpacity(0.5),
+                  colorBlendMode: BlendMode.modulate,
+                ),
+              );
             }
 
             return Hero(
               key: ValueKey(currentPokemon),
               tag: pokemon.name,
-              child: image,
+              child: Image(
+                image: image,
+                fit: BoxFit.fitHeight,
+                filterQuality: FilterQuality.high,
+              ),
             );
           },
         );

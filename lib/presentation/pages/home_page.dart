@@ -136,12 +136,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             delegate: SliverChildListDelegate(
                               pokemons
-                                  .map(
-                                    (e) => PokemonCard(
-                                      pokemon: e,
-                                      index: value.pokemons.indexOf(e),
-                                    ),
-                                  )
+                                  .map((e) => PokemonCard(pokemon: e))
                                   .toList(),
                             ),
                           );

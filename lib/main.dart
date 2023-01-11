@@ -6,6 +6,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pokedex/common/pokedex_bloc_observer.dart';
 import 'package:pokedex/core/core.dart';
+import 'package:pokedex/data/data.dart';
 import 'package:pokedex/presentation/presentation.dart';
 
 Future<void> main() async {
@@ -42,6 +43,7 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => PokemonListBloc()),
           BlocProvider(create: (context) => SettingsCubit()),
+          BlocProvider(create: (context) => PokemonSwitcherCubit(Pokemon())),
         ],
         child: BlocBuilder<SettingsCubit, SettingsState>(
           builder: (context, state) => MaterialApp.router(

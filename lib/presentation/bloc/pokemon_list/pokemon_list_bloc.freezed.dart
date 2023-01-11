@@ -225,7 +225,7 @@ mixin _$PokemonListState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(int? dataLoaded) loading,
     required TResult Function(List<Pokemon> pokemons, String? nextUrl) loaded,
     required TResult Function(Failure failure) error,
   }) =>
@@ -233,7 +233,7 @@ mixin _$PokemonListState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(int? dataLoaded)? loading,
     TResult? Function(List<Pokemon> pokemons, String? nextUrl)? loaded,
     TResult? Function(Failure failure)? error,
   }) =>
@@ -241,7 +241,7 @@ mixin _$PokemonListState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(int? dataLoaded)? loading,
     TResult Function(List<Pokemon> pokemons, String? nextUrl)? loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
@@ -330,7 +330,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(int? dataLoaded) loading,
     required TResult Function(List<Pokemon> pokemons, String? nextUrl) loaded,
     required TResult Function(Failure failure) error,
   }) {
@@ -341,7 +341,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(int? dataLoaded)? loading,
     TResult? Function(List<Pokemon> pokemons, String? nextUrl)? loaded,
     TResult? Function(Failure failure)? error,
   }) {
@@ -352,7 +352,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(int? dataLoaded)? loading,
     TResult Function(List<Pokemon> pokemons, String? nextUrl)? loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
@@ -410,6 +410,8 @@ abstract class _$$_LoadingCopyWith<$Res> {
   factory _$$_LoadingCopyWith(
           _$_Loading value, $Res Function(_$_Loading) then) =
       __$$_LoadingCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int? dataLoaded});
 }
 
 /// @nodoc
@@ -418,60 +420,85 @@ class __$$_LoadingCopyWithImpl<$Res>
     implements _$$_LoadingCopyWith<$Res> {
   __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? dataLoaded = freezed,
+  }) {
+    return _then(_$_Loading(
+      dataLoaded: freezed == dataLoaded
+          ? _value.dataLoaded
+          : dataLoaded // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Loading implements _Loading {
-  const _$_Loading();
+  const _$_Loading({this.dataLoaded});
+
+  @override
+  final int? dataLoaded;
 
   @override
   String toString() {
-    return 'PokemonListState.loading()';
+    return 'PokemonListState.loading(dataLoaded: $dataLoaded)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loading);
+        (other.runtimeType == runtimeType &&
+            other is _$_Loading &&
+            (identical(other.dataLoaded, dataLoaded) ||
+                other.dataLoaded == dataLoaded));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, dataLoaded);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_LoadingCopyWith<_$_Loading> get copyWith =>
+      __$$_LoadingCopyWithImpl<_$_Loading>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(int? dataLoaded) loading,
     required TResult Function(List<Pokemon> pokemons, String? nextUrl) loaded,
     required TResult Function(Failure failure) error,
   }) {
-    return loading();
+    return loading(dataLoaded);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(int? dataLoaded)? loading,
     TResult? Function(List<Pokemon> pokemons, String? nextUrl)? loaded,
     TResult? Function(Failure failure)? error,
   }) {
-    return loading?.call();
+    return loading?.call(dataLoaded);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(int? dataLoaded)? loading,
     TResult Function(List<Pokemon> pokemons, String? nextUrl)? loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(dataLoaded);
     }
     return orElse();
   }
@@ -515,7 +542,12 @@ class _$_Loading implements _Loading {
 }
 
 abstract class _Loading implements PokemonListState {
-  const factory _Loading() = _$_Loading;
+  const factory _Loading({final int? dataLoaded}) = _$_Loading;
+
+  int? get dataLoaded;
+  @JsonKey(ignore: true)
+  _$$_LoadingCopyWith<_$_Loading> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -597,7 +629,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(int? dataLoaded) loading,
     required TResult Function(List<Pokemon> pokemons, String? nextUrl) loaded,
     required TResult Function(Failure failure) error,
   }) {
@@ -608,7 +640,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(int? dataLoaded)? loading,
     TResult? Function(List<Pokemon> pokemons, String? nextUrl)? loaded,
     TResult? Function(Failure failure)? error,
   }) {
@@ -619,7 +651,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(int? dataLoaded)? loading,
     TResult Function(List<Pokemon> pokemons, String? nextUrl)? loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),
@@ -742,7 +774,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
+    required TResult Function(int? dataLoaded) loading,
     required TResult Function(List<Pokemon> pokemons, String? nextUrl) loaded,
     required TResult Function(Failure failure) error,
   }) {
@@ -753,7 +785,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
+    TResult? Function(int? dataLoaded)? loading,
     TResult? Function(List<Pokemon> pokemons, String? nextUrl)? loaded,
     TResult? Function(Failure failure)? error,
   }) {
@@ -764,7 +796,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
+    TResult Function(int? dataLoaded)? loading,
     TResult Function(List<Pokemon> pokemons, String? nextUrl)? loaded,
     TResult Function(Failure failure)? error,
     required TResult orElse(),

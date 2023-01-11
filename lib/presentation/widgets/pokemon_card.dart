@@ -10,12 +10,10 @@ import 'package:pokedex/utils/utils.dart';
 
 class PokemonCard extends StatelessWidget {
   final Pokemon pokemon;
-  final int index;
 
   const PokemonCard({
     super.key,
     required this.pokemon,
-    required this.index,
   });
 
   @override
@@ -35,9 +33,32 @@ class PokemonCard extends StatelessWidget {
             onTap: () => state.mapOrNull<void>(
               loaded: (value) {
                 FocusScope.of(context).unfocus();
-                router.push(
-                  PokemonDetailsRoute(currentIndex: index, pokemon: pokemon),
-                );
+                router
+                    .push(PokemonDetailsRoute(pokemon: pokemon))
+                    .whenComplete(() {
+                  final pokemon =
+                      BlocProvider.of<PokemonSwitcherCubit>(context).state;
+
+                  final valueContext =
+                      GlobalObjectKey(pokemon.name).currentContext;
+
+                  if (valueContext == null) {
+                    return;
+                  }
+
+                  final scrollPosition = Scrollable.of(valueContext)?.position;
+                  final renderObject = valueContext.findRenderObject();
+
+                  if (scrollPosition == null || renderObject == null) {
+                    return;
+                  }
+
+                  scrollPosition.ensureVisible(
+                    renderObject,
+                    duration: const Duration(milliseconds: 400),
+                    alignment: 0.2,
+                  );
+                });
               },
             ),
             child: Stack(
@@ -46,7 +67,7 @@ class PokemonCard extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.fromLTRB(16, 16, 16, 32.sp),
                   child: Hero(
-                    key: ValueKey(pokemon),
+                    key: GlobalObjectKey(pokemon.name),
                     tag: pokemon.name,
                     child: state.maybeMap(
                       orElse: () => Assets.images.icon.image(),

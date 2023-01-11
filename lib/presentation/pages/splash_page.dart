@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:pokedex/core/core.dart';
 import 'package:pokedex/presentation/presentation.dart';
 import 'package:pokedex/utils/utils.dart';
@@ -10,18 +11,12 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Future.delayed(
-    //   const Duration(seconds: 2),
-    //   () => router.pushAndPopUntil(
-    //     const HomeRoute(),
-    //     predicate: (route) => false,
-    //   ),
-    // );
-
     return BlocListener<PokemonListBloc, PokemonListState>(
       bloc: BlocProvider.of<PokemonListBloc>(context)
         ..add(const PokemonListEvent.getPokemons(force: true)),
       listener: (context, state) => state.mapOrNull(
+        error: (value) => ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(value.failure.message))),
         loaded: (value) => router.pushAndPopUntil(
           const HomeRoute(),
           predicate: (route) => false,
@@ -34,12 +29,41 @@ class SplashPage extends StatelessWidget {
             Center(
               child: Assets.images.icon.image(),
             ),
-            const Positioned.fill(
+            Positioned.fill(
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: EdgeInsets.all(16),
-                  child: CircularProgressIndicator(),
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      const CircularProgressIndicator.adaptive(),
+                      const Gap(8),
+                      BlocBuilder<PokemonListBloc, PokemonListState>(
+                        builder: (context, state) {
+                          final pokemonsLenght = state.mapOrNull(
+                            loading: (value) => value.dataLoaded,
+                          );
+
+                          if (pokemonsLenght == null || pokemonsLenght <= 0) {
+                            return const Text(
+                              '  ',
+                              textAlign: TextAlign.center,
+                            );
+                          }
+
+                          return Text(
+                            '$pokemonsLenght',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: context.theme.colorScheme.onBackground,
+                            ),
+                          );
+                        },
+                      )
+                    ],
+                  ),
                 ),
               ),
             )

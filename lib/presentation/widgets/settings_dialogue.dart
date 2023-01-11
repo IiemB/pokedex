@@ -70,6 +70,7 @@ class SettingsDialogue extends StatelessWidget {
                 builder: (context, state) => SwitchListTile(
                   value: state.showSearch,
                   title: const Text('Show Search'),
+                  subtitle: const Text('Experimental'),
                   onChanged:
                       BlocProvider.of<SettingsCubit>(context).updateShowSearch,
                 ),

@@ -31,6 +31,7 @@ environment:
 dependencies:
   auto_route: ^5.0.4
   bloc_concurrency: ^0.2.0
+  carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
   dio: ^4.0.6
@@ -50,6 +51,7 @@ dependencies:
   hydrated_bloc: ^9.0.0
   injectable: ^2.1.0
   json_annotation: ^4.7.0
+  page_view_dot_indicator: ^2.1.0
   palette_generator: ^0.3.3+2
   path_provider: ^2.0.11
   shimmer: ^2.0.0

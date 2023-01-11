@@ -8,7 +8,7 @@ class SettingsState {
   const SettingsState({
     this.themeState = ThemeState.light,
     this.gridCount = 2,
-    this.showSearch = true,
+    this.showSearch = false,
   });
 
   factory SettingsState.fromJson(Map<String, dynamic> json) {

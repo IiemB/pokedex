@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokedex/presentation/presentation.dart';
 
 class PokedexBlocObserver extends BlocObserver {
   final bool onCreateLog;
@@ -46,7 +45,7 @@ class PokedexBlocObserver extends BlocObserver {
 
   @override
   void onTransition(Bloc bloc, Transition transition) {
-    if (onTransitionLog && bloc is! PokemonDetailsBloc) {
+    if (onTransitionLog) {
       log('onTransition -- ${bloc.runtimeType}, ${transition.currentState.runtimeType} -> ${transition.nextState.runtimeType}');
     }
     super.onTransition(bloc, transition);

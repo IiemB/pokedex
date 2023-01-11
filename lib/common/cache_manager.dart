@@ -67,26 +67,27 @@ class CacheManager {
 
   Future<File?> getCacheFile(String? url, {bool? force}) async {
     try {
-      // await DefaultCacheManager().emptyCache();
-
       if (url == null) {
         return null;
       }
 
+      final key = url.replaceAll('/', '-');
+
       if (force == true) {
-        await DefaultCacheManager().removeFile(url);
+        await _cacheManager.removeFile(key);
       }
 
-      FileInfo? downloadedFile;
+      var downloadedFile = await _cacheManager.getFileFromCache(key);
 
-      downloadedFile = await DefaultCacheManager().getFileFromCache(url);
+      downloadedFile ??= await _cacheManager.downloadFile(url, key: key);
 
-      downloadedFile ??=
-          await DefaultCacheManager().downloadFile(url, key: url);
+      final file = downloadedFile.file;
 
-      final result = downloadedFile.file;
+      if (!await file.exists()) {
+        return null;
+      }
 
-      return result;
+      return file;
     } catch (e) {
       log(e.toString());
       return null;
