@@ -15,9 +15,9 @@ import 'package:pokedex/data/datasources/pokedex_remote_datasources_impl.dart'
 import 'package:pokedex/data/repositories/pokedex_repository_impl.dart' as _i8;
 import 'package:pokedex/domain/domain.dart' as _i7;
 
-/// ignore_for_file: unnecessary_lambdas
-/// ignore_for_file: lines_longer_than_80_chars
-/// initializes the registration of main-scope dependencies inside of [GetIt]
+// ignore_for_file: unnecessary_lambdas
+// ignore_for_file: lines_longer_than_80_chars
+// initializes the registration of main-scope dependencies inside of GetIt
 _i1.GetIt $initGetIt(
   _i1.GetIt getIt, {
   String? environment,

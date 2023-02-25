@@ -36,28 +36,28 @@ class PokemonCard extends StatelessWidget {
                 router
                     .push(PokemonDetailsRoute(pokemon: pokemon))
                     .whenComplete(() {
-                  final pokemon =
-                      BlocProvider.of<PokemonSwitcherCubit>(context).state;
+                  // final pokemon =
+                  //     BlocProvider.of<PokemonSwitcherCubit>(context).state;
 
-                  final valueContext =
-                      GlobalObjectKey(pokemon.name).currentContext;
+                  // final valueContext =
+                  //     GlobalObjectKey(pokemon.name).currentContext;
 
-                  if (valueContext == null) {
-                    return;
-                  }
+                  // if (valueContext == null) {
+                  //   return;
+                  // }
 
-                  final scrollPosition = Scrollable.of(valueContext)?.position;
-                  final renderObject = valueContext.findRenderObject();
+                  // final scrollPosition = Scrollable.of(valueContext).position;
+                  // final renderObject = valueContext.findRenderObject();
 
-                  if (scrollPosition == null || renderObject == null) {
-                    return;
-                  }
+                  // if (renderObject == null) {
+                  //   return;
+                  // }
 
-                  scrollPosition.ensureVisible(
-                    renderObject,
-                    duration: const Duration(milliseconds: 400),
-                    alignment: 0.2,
-                  );
+                  // scrollPosition.ensureVisible(
+                  //   renderObject,
+                  //   duration: const Duration(milliseconds: 400),
+                  //   alignment: 0.2,
+                  // );
                 });
               },
             ),

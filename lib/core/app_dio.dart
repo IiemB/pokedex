@@ -3,21 +3,23 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:dio/src/adapters/io_adapter.dart' show DefaultHttpClientAdapter;
+import 'package:dio/src/adapters/io_adapter.dart' show IOHttpClientAdapter;
 import 'package:flutter/foundation.dart';
 
 class AppDio with DioMixin implements Dio {
+  static const _timeOutDuration = Duration(seconds: 50);
+
   AppDio._([BaseOptions? options]) {
     options ??= BaseOptions(
       contentType: 'application/json; charset=utf-8',
-      connectTimeout: 50000,
-      sendTimeout: 50000,
-      receiveTimeout: 50000,
+      connectTimeout: _timeOutDuration,
+      sendTimeout: _timeOutDuration,
+      receiveTimeout: _timeOutDuration,
     );
 
     this.options = options;
 
-    if (kDebugMode && false) {
+    if (kDebugMode) {
       interceptors.add(
         InterceptorsWrapper(
           onRequest: (options, handler) {
@@ -44,7 +46,7 @@ class AppDio with DioMixin implements Dio {
         ),
       );
     }
-    httpClientAdapter = DefaultHttpClientAdapter();
+    httpClientAdapter = IOHttpClientAdapter();
   }
 
   static AppDio get instance => AppDio._();

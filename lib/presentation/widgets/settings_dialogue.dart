@@ -64,17 +64,17 @@ class SettingsDialogue extends StatelessWidget {
                       .updateGridCount(value.toInt()),
                 ),
               ),
-              BlocBuilder<SettingsCubit, SettingsState>(
-                buildWhen: (previous, current) =>
-                    previous.showSearch != current.showSearch,
-                builder: (context, state) => SwitchListTile(
-                  value: state.showSearch,
-                  title: const Text('Show Search'),
-                  subtitle: const Text('Experimental'),
-                  onChanged:
-                      BlocProvider.of<SettingsCubit>(context).updateShowSearch,
-                ),
-              ),
+              // BlocBuilder<SettingsCubit, SettingsState>(
+              //   buildWhen: (previous, current) =>
+              //       previous.showSearch != current.showSearch,
+              //   builder: (context, state) => SwitchListTile(
+              //     value: state.showSearch,
+              //     title: const Text('Show Search'),
+              //     subtitle: const Text('Experimental'),
+              //     onChanged:
+              //         BlocProvider.of<SettingsCubit>(context).updateShowSearch,
+              //   ),
+              // ),
               SizedBox(
                 width: context.width,
                 child: OutlinedButton.icon(

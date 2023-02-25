@@ -47,6 +47,7 @@ class MyApp extends StatelessWidget {
         ],
         child: BlocBuilder<SettingsCubit, SettingsState>(
           builder: (context, state) => MaterialApp.router(
+            debugShowCheckedModeBanner: false,
             title: 'Pokedex',
             themeMode: state.themeState.themeMode,
             theme: state.themeState.themeData,
