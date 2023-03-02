@@ -57,39 +57,67 @@ class _HomePageState extends State<HomePage> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: TextField(
-                          controller: _searchController,
-                          textCapitalization: TextCapitalization.words,
-                          style: TextStyle(
-                            color: context.theme.colorScheme.onPrimary,
-                          ),
-                          cursorColor: context.theme.colorScheme.onPrimary,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: context.theme.primaryColor,
-                            prefixIcon: Icon(
-                              Icons.search,
-                              color: context.theme.colorScheme.onPrimary,
-                            ),
-                            hintText: 'Search Pokemon',
-                            hintStyle: TextStyle(
-                              color: context.theme.colorScheme.onPrimary,
-                            ),
-                            suffixIcon: IconButton(
-                              tooltip: 'Settings',
-                              onPressed: () => context.showBottomSheet(
-                                builder: (context) => const SettingsDialogue(),
-                              ),
-                              icon: Icon(
-                                Icons.settings,
+                        child: Theme(
+                          data: context.theme.copyWith(
+                            inputDecorationTheme:
+                                context.theme.inputDecorationTheme.copyWith(
+                              filled: true,
+                              fillColor: context.theme.primaryColor,
+                              prefixIconColor:
+                                  context.theme.colorScheme.onPrimary,
+                              hintStyle: TextStyle(
                                 color: context.theme.colorScheme.onPrimary,
                               ),
                             ),
                           ),
-                          onTap: () => _scrollController.jumpTo(0),
-                          onChanged: BlocProvider.of<SearchPokemonCubit>(
-                            context,
-                          ).search,
+                          child: TextField(
+                            controller: _searchController,
+                            textCapitalization: TextCapitalization.words,
+                            style: TextStyle(
+                              color: context.theme.colorScheme.onPrimary,
+                            ),
+                            cursorColor: context.theme.colorScheme.onPrimary,
+                            decoration: InputDecoration(
+                              prefixIcon: const Icon(Icons.search),
+                              hintText: 'Search Pokemon',
+                              suffixIcon: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color:
+                                          context.theme.colorScheme.onPrimary,
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: BlocBuilder<SearchPokemonCubit,
+                                        List<Pokemon>>(
+                                      builder: (context, state) => Text(
+                                        state.length.toString(),
+                                        style: TextStyle(
+                                          color:
+                                              context.theme.colorScheme.primary,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  IconButton(
+                                    tooltip: 'Settings',
+                                    onPressed: () => context.showBottomSheet(
+                                      builder: (context) =>
+                                          const SettingsDialogue(),
+                                    ),
+                                    color: context.theme.colorScheme.onPrimary,
+                                    icon: const Icon(Icons.settings),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            onTap: () => _scrollController.jumpTo(0),
+                            onChanged: BlocProvider.of<SearchPokemonCubit>(
+                              context,
+                            ).search,
+                          ),
                         ),
                       ),
                     );

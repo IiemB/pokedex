@@ -6,7 +6,8 @@ import 'package:pokedex/presentation/presentation.dart';
 import 'package:pokedex/utils/utils.dart';
 
 class PokemonDetailHeader extends StatelessWidget {
-  const PokemonDetailHeader({super.key});
+  final List<Pokemon> pokemons;
+  const PokemonDetailHeader({super.key, required this.pokemons});
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +60,10 @@ class PokemonDetailHeader extends StatelessWidget {
                 bottom: Radius.circular(16),
               ),
             ),
-            flexibleSpace: const FlexibleSpaceBar(
-              background: PokemonImagesCarousel(),
+            flexibleSpace: FlexibleSpaceBar(
+              background: PokemonImagesCarousel(
+                pokemons: pokemons,
+              ),
             ),
           );
         },

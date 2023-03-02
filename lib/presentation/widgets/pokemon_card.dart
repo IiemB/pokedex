@@ -34,7 +34,13 @@ class PokemonCard extends StatelessWidget {
               loaded: (value) {
                 FocusScope.of(context).unfocus();
                 router
-                    .push(PokemonDetailsRoute(pokemon: pokemon))
+                    .push(
+                  PokemonDetailsRoute(
+                    pokemon: pokemon,
+                    pokemons:
+                        BlocProvider.of<SearchPokemonCubit>(context).state,
+                  ),
+                )
                     .whenComplete(() {
                   // final pokemon =
                   //     BlocProvider.of<PokemonSwitcherCubit>(context).state;

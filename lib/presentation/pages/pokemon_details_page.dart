@@ -9,9 +9,11 @@ class PokemonDetailsPage extends StatelessWidget {
   static const routeName = 'pokemon-details';
 
   final Pokemon pokemon;
+  final List<Pokemon> pokemons;
   const PokemonDetailsPage({
     super.key,
     required this.pokemon,
+    required this.pokemons,
   });
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,9 @@ class PokemonDetailsPage extends StatelessWidget {
         builder: (context) => Scaffold(
           body: CustomScrollView(
             slivers: [
-              const PokemonDetailHeader(),
+              PokemonDetailHeader(
+                pokemons: pokemons,
+              ),
               SliverList(
                 delegate: SliverChildListDelegate(
                   [

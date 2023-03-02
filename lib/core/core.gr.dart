@@ -43,6 +43,7 @@ class AppRouter extends _i2.RootStackRouter {
         child: _i1.PokemonDetailsPage(
           key: args.key,
           pokemon: args.pokemon,
+          pokemons: args.pokemons,
         ),
       );
     },
@@ -105,12 +106,14 @@ class PokemonDetailsRoute extends _i2.PageRouteInfo<PokemonDetailsRouteArgs> {
   PokemonDetailsRoute({
     _i4.Key? key,
     required _i5.Pokemon pokemon,
+    required List<_i5.Pokemon> pokemons,
   }) : super(
           PokemonDetailsRoute.name,
           path: 'pokemon-details',
           args: PokemonDetailsRouteArgs(
             key: key,
             pokemon: pokemon,
+            pokemons: pokemons,
           ),
         );
 
@@ -121,15 +124,18 @@ class PokemonDetailsRouteArgs {
   const PokemonDetailsRouteArgs({
     this.key,
     required this.pokemon,
+    required this.pokemons,
   });
 
   final _i4.Key? key;
 
   final _i5.Pokemon pokemon;
 
+  final List<_i5.Pokemon> pokemons;
+
   @override
   String toString() {
-    return 'PokemonDetailsRouteArgs{key: $key, pokemon: $pokemon}';
+    return 'PokemonDetailsRouteArgs{key: $key, pokemon: $pokemon, pokemons: $pokemons}';
   }
 }
 

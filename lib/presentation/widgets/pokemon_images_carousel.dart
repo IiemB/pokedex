@@ -7,7 +7,8 @@ import 'package:pokedex/presentation/presentation.dart';
 import 'package:pokedex/utils/utils.dart';
 
 class PokemonImagesCarousel extends StatelessWidget {
-  const PokemonImagesCarousel({super.key});
+  final List<Pokemon> pokemons;
+  const PokemonImagesCarousel({super.key, required this.pokemons});
 
   @override
   Widget build(BuildContext context) {
@@ -21,46 +22,41 @@ class PokemonImagesCarousel extends StatelessWidget {
         children: [
           SizedBox(
             width: context.width,
-            child: BlocBuilder<PokemonListBloc, PokemonListState>(
-              builder: (context, state) => state.maybeMap(
-                orElse: () => Assets.images.icon.image(),
-                loaded: (value) => CarouselSlider.builder(
-                  options: CarouselOptions(
-                    initialPage: value.pokemons.indexOf(
-                      BlocProvider.of<PokemonSwitcherCubit>(context).state,
-                    ),
-                    enlargeCenterPage: true,
-                    autoPlay: true,
-                    enableInfiniteScroll: false,
-                    autoPlayInterval: const Duration(seconds: 3),
-                    disableCenter: true,
-                    enlargeStrategy: CenterPageEnlargeStrategy.zoom,
-                    enlargeFactor: 0.5,
-                    viewportFraction: 0.7,
-                    padEnds: false,
-                    onPageChanged: (index, reason) {
-                      final pokemon = value.pokemons[index]
-                        ..detailBloc
-                            .add(const PokemonDetailsEvent.getPokemonDetail());
-
-                      if (index + 1 < value.pokemons.length) {
-                        value.pokemons[index + 1].detailBloc
-                            .add(const PokemonDetailsEvent.getPokemonDetail());
-                      }
-
-                      BlocProvider.of<PokemonSwitcherCubit>(
-                        context,
-                      ).switchPokemon(pokemon);
-                    },
-                  ),
-                  itemCount: value.pokemons.length,
-                  itemBuilder: (context, index, realIndex) {
-                    final pokemon = value.pokemons[index];
-
-                    return PokemonHeaderImage(pokemon: pokemon);
-                  },
+            child: CarouselSlider.builder(
+              options: CarouselOptions(
+                initialPage: pokemons.indexOf(
+                  BlocProvider.of<PokemonSwitcherCubit>(context).state,
                 ),
+                enlargeCenterPage: true,
+                enableInfiniteScroll: false,
+                autoPlayInterval: const Duration(seconds: 3),
+                disableCenter: true,
+                enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+                enlargeFactor: 0.5,
+                viewportFraction: 0.7,
+                padEnds: false,
+                onPageChanged: (index, reason) {
+                  final pokemon = pokemons[index]
+                    ..detailBloc
+                        .add(const PokemonDetailsEvent.getPokemonDetail());
+
+                  if (index + 1 < pokemons.length) {
+                    pokemons[index + 1]
+                        .detailBloc
+                        .add(const PokemonDetailsEvent.getPokemonDetail());
+                  }
+
+                  BlocProvider.of<PokemonSwitcherCubit>(
+                    context,
+                  ).switchPokemon(pokemon);
+                },
               ),
+              itemCount: pokemons.length,
+              itemBuilder: (context, index, realIndex) {
+                final pokemon = pokemons[index];
+
+                return PokemonHeaderImage(pokemon: pokemon);
+              },
             ),
           ),
           Align(
