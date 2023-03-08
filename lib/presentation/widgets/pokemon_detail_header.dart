@@ -57,7 +57,7 @@ class PokemonDetailHeader extends StatelessWidget {
             ),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(16),
+                bottom: Radius.circular(12),
               ),
             ),
             flexibleSpace: FlexibleSpaceBar(
