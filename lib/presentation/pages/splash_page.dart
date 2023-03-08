@@ -17,9 +17,12 @@ class SplashPage extends StatelessWidget {
       listener: (context, state) => state.mapOrNull(
         error: (value) => ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(value.failure.message))),
-        loaded: (value) => router.pushAndPopUntil(
-          const HomeRoute(),
-          predicate: (route) => false,
+        loaded: (value) => Future.delayed(
+          const Duration(seconds: 1),
+          () => router.pushAndPopUntil(
+            const HomeRoute(),
+            predicate: (route) => false,
+          ),
         ),
       ),
       child: Scaffold(
