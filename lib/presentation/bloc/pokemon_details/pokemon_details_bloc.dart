@@ -17,9 +17,10 @@ part 'pokemon_details_state.dart';
 
 class PokemonDetailsBloc
     extends Bloc<PokemonDetailsEvent, PokemonDetailsState> {
-  final String? url;
+  final String? name;
 
-  PokemonDetailsBloc(this.url) : super(const PokemonDetailsState.initial()) {
+  PokemonDetailsBloc({required this.name})
+      : super(const PokemonDetailsState.initial()) {
     on<_GetPokemonDetail>(_onGetPokemonDetail, transformer: droppable());
   }
 
@@ -36,13 +37,13 @@ class PokemonDetailsBloc
 
     emit(const PokemonDetailsState.loading());
 
-    final url = this.url;
+    final name = this.name;
 
-    if (url == null) {
+    if (name == null) {
       return;
     }
 
-    final result = await PokedexUsecases.getPokemonDetails(url);
+    final result = await PokedexUsecases.getPokemonDetails(name);
 
     await result.fold(
       (l) async => emit(PokemonDetailsState.error(l)),
@@ -98,7 +99,7 @@ class PokemonDetailsBloc
 
   @override
   Future<void> close() {
-    log('$url closed');
+    log('$name closed');
     return super.close();
   }
 }

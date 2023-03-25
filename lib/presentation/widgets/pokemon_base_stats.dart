@@ -38,104 +38,120 @@ class PokemonBaseStats extends StatelessWidget {
                   fontSize: 20.sp,
                 ),
               ),
-              Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ...pokemonStats
-                          .map(
-                            (e) => SizedBox(
-                              height: 30.sp,
-                              child: Center(
-                                child: Text(
-                                  '${e.statDetail?.pokemonStat.statName}',
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    color: context
-                                        .theme.colorScheme.onBackground
-                                        .withOpacity(0.8),
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 14.sp,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                          .toList(),
-                    ],
-                  ),
-                  const Spacer(),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ...pokemonStats.map(
-                        (e) {
-                          var statValue = e.baseStat ?? 10;
-                          if (statValue > 100) {
-                            statValue = 100;
-                          }
-
-                          final witdthValue = valueW * ((statValue) / 100);
-                          return SizedBox(
-                            height: 30.sp,
-                            child: Stack(
-                              children: [
-                                Container(
-                                  height: 18.sp,
-                                  margin: EdgeInsets.symmetric(vertical: 8.sp),
-                                  width: valueW,
-                                  decoration: BoxDecoration(
-                                    color: context
-                                        .theme.colorScheme.onBackground
-                                        .withOpacity(0.2),
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(16),
-                                    ),
-                                  ),
-                                ),
-                                AnimatedContainer(
-                                  duration: const Duration(milliseconds: 500),
-                                  height: 18.sp,
-                                  margin: EdgeInsets.symmetric(vertical: 8.sp),
-                                  width: witdthValue,
-                                  decoration: BoxDecoration(
-                                    color: e.statDetail?.pokemonStat.color,
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(16),
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      '${statValue > 0 ? statValue : 0}'
-                                          .toUpperCase(),
-                                      textAlign: TextAlign.center,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        color: e.statDetail?.pokemonStat.color
-                                            .getContrastColor
-                                            .withOpacity(0.8),
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 10.sp,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ).toList(),
-                    ],
-                  ),
-                ],
+              _Stat(
+                pokemonStats: pokemonStats,
+                valueW: valueW,
               ),
             ],
           );
         },
       ),
+    );
+  }
+}
+
+class _Stat extends StatelessWidget {
+  const _Stat({
+    Key? key,
+    required this.pokemonStats,
+    required this.valueW,
+  }) : super(key: key);
+
+  final List<Stat> pokemonStats;
+  final double valueW;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ...pokemonStats
+                .map(
+                  (e) => SizedBox(
+                    height: 30.sp,
+                    child: Center(
+                      child: Text(
+                        '${e.statDetail?.pokemonStat.statName}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: context.theme.colorScheme.onBackground
+                              .withOpacity(0.8),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+                .toList(),
+          ],
+        ),
+        const Spacer(),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ...pokemonStats.map(
+              (e) {
+                var statValue = e.baseStat ?? 10;
+                if (statValue > 100) {
+                  statValue = 100;
+                }
+
+                final witdthValue = valueW * ((statValue) / 100);
+                return SizedBox(
+                  height: 30.sp,
+                  child: Stack(
+                    children: [
+                      Container(
+                        height: 18.sp,
+                        margin: EdgeInsets.symmetric(vertical: 8.sp),
+                        width: valueW,
+                        decoration: BoxDecoration(
+                          color: context.theme.colorScheme.onBackground
+                              .withOpacity(0.2),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(16),
+                          ),
+                        ),
+                      ),
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 500),
+                        height: 18.sp,
+                        margin: EdgeInsets.symmetric(vertical: 8.sp),
+                        width: witdthValue,
+                        decoration: BoxDecoration(
+                          color: e.statDetail?.pokemonStat.color,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(16),
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            '${statValue > 0 ? statValue : 0}'.toUpperCase(),
+                            textAlign: TextAlign.center,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: e.statDetail?.pokemonStat.color
+                                  .getContrastColor
+                                  .withOpacity(0.8),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 10.sp,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ).toList(),
+          ],
+        ),
+      ],
     );
   }
 }

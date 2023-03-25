@@ -34,82 +34,77 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => SearchPokemonCubit()),
-      ],
-      child: Builder(
-        builder: (context) => Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Scrollbar(
+    return Builder(
+      builder: (context) => Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Scrollbar(
+          controller: _scrollController,
+          radius: const Radius.circular(16),
+          child: CustomScrollView(
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             controller: _scrollController,
-            radius: const Radius.circular(16),
-            child: CustomScrollView(
-              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              controller: _scrollController,
-              slivers: [
-                // Handle slow animated padding on notched IPhone
-                if (Platform.isIOS) ...[
-                  SliverAppBar(
-                    backgroundColor: context.theme.primaryColor,
-                    titleTextStyle: context.theme.appBarTheme.titleTextStyle
-                        ?.copyWith(color: context.theme.colorScheme.onPrimary),
-                    floating: true,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(
-                        bottom: Radius.circular(12),
-                      ),
+            slivers: [
+              // Handle slow animated padding on notched IPhone
+              if (Platform.isIOS) ...[
+                SliverAppBar(
+                  backgroundColor: context.theme.primaryColor,
+                  titleTextStyle: context.theme.appBarTheme.titleTextStyle
+                      ?.copyWith(color: context.theme.colorScheme.onPrimary),
+                  floating: true,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.vertical(
+                      bottom: Radius.circular(12),
                     ),
-                    title: const Text('Pokedex'),
-                    centerTitle: false,
-                    bottom: PreferredSize(
-                      preferredSize: const Size.fromHeight(kToolbarHeight),
+                  ),
+                  title: const Text('Pokedex'),
+                  centerTitle: false,
+                  bottom: PreferredSize(
+                    preferredSize: const Size.fromHeight(kToolbarHeight),
+                    child: _SearchPokemonField(
+                      searchController: _searchController,
+                      scrollController: _scrollController,
+                    ),
+                  ),
+                ),
+                _PokemonList(searchController: _searchController)
+              ] else
+                SliverStickyHeader.builder(
+                  builder: (context, state) {
+                    return AnimatedPadding(
+                      duration: const Duration(milliseconds: 100),
+                      padding: EdgeInsets.only(
+                        top: state.isPinned
+                            ? MediaQuery.of(context).padding.top
+                            : 0,
+                      ),
                       child: _SearchPokemonField(
                         searchController: _searchController,
                         scrollController: _scrollController,
                       ),
-                    ),
-                  ),
-                  _PokemonList(searchController: _searchController)
-                ] else
-                  SliverStickyHeader.builder(
-                    builder: (context, state) {
-                      return AnimatedPadding(
-                        duration: const Duration(milliseconds: 100),
-                        padding: EdgeInsets.only(
-                          top: state.isPinned
-                              ? MediaQuery.of(context).padding.top
-                              : 0,
-                        ),
-                        child: _SearchPokemonField(
-                          searchController: _searchController,
-                          scrollController: _scrollController,
-                        ),
-                      );
-                    },
-                    sliver: _PokemonList(searchController: _searchController),
-                  ),
-                BlocBuilder<PokemonListBloc, PokemonListState>(
-                  buildWhen: (previous, current) => current.maybeMap(
-                    orElse: () => false,
-                    loaded: (value) => value.nextUrl == null,
-                    loading: (value) => true,
-                  ),
-                  builder: (context, state) => state.maybeMap(
-                    orElse: () => const SliverToBoxAdapter(),
-                    loading: (value) => const SliverToBoxAdapter(
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          'Loading data...',
-                          textAlign: TextAlign.center,
-                        ),
+                    );
+                  },
+                  sliver: _PokemonList(searchController: _searchController),
+                ),
+              BlocBuilder<PokemonListBloc, PokemonListState>(
+                buildWhen: (previous, current) => current.maybeMap(
+                  orElse: () => false,
+                  loaded: (value) => value.nextUrl == null,
+                  loading: (value) => true,
+                ),
+                builder: (context, state) => state.maybeMap(
+                  orElse: () => const SliverToBoxAdapter(),
+                  loading: (value) => const SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Loading data...',
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

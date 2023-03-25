@@ -42,8 +42,9 @@ class PokedexRemoteDatasourcesImpl implements PokedexRemoteDatasources {
   }
 
   @override
-  Future<PokemonDetails> getPokemonDetail(String url) async {
+  Future<PokemonDetails> getPokemonDetail(String name) async {
     try {
+      final url = 'https://pokeapi.co/api/v2/pokemon/$name';
       Future<PokemonDetails> getData() async {
         final response = await _dio.get(url);
 
@@ -62,6 +63,41 @@ class PokedexRemoteDatasourcesImpl implements PokedexRemoteDatasources {
 
       if (cachedJsonData != null) {
         return PokemonDetails.fromJson(cachedJsonData);
+      }
+
+      final data = await getData();
+
+      await cacheManager.saveJson(url, data.toJson());
+
+      return data;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Evolution> getEvolutionChain(int id) async {
+    try {
+      final url = 'https://pokeapi.co/api/v2/evolution-chain/$id';
+
+      Future<Evolution> getData() async {
+        final response = await _dio.get(url);
+
+        final data = Evolution.fromJson(response.data);
+
+        return data;
+      }
+
+      if (kIsWeb) {
+        final data = await getData();
+
+        return data;
+      }
+
+      final cachedJsonData = await cacheManager.getJson(url);
+
+      if (cachedJsonData != null) {
+        return Evolution.fromJson(cachedJsonData);
       }
 
       final data = await getData();

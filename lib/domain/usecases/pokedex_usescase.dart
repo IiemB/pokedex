@@ -9,13 +9,21 @@ final _repository = getIt<PokedexRepository>();
 class PokedexUsecases {
   static const getPokemons = $GetPokemons();
   static const getPokemonDetails = $GetPokemonDetails();
+  static const getEvolutionChain = $GetEvolutionChain();
+}
+
+class $GetEvolutionChain {
+  const $GetEvolutionChain();
+
+  Future<Either<Failure, Evolution>> call(int id) =>
+      _repository.getEvolutionChain(id);
 }
 
 class $GetPokemonDetails {
   const $GetPokemonDetails();
 
-  Future<Either<Failure, PokemonDetails>> call(String url) =>
-      _repository.getPokemonDetails(url);
+  Future<Either<Failure, PokemonDetails>> call(String name) =>
+      _repository.getPokemonDetails(name);
 }
 
 class $GetPokemons {

@@ -6,8 +6,8 @@ class Pokemon {
   Pokemon({
     String? name,
     this.url,
-  })  : name = '${name?.replaceAll('-', ' ')}'.capitalizeAllWords,
-        detailBloc = PokemonDetailsBloc(url);
+  })  : name = '$name'.formSlugThenCapitalized,
+        detailBloc = PokemonDetailsBloc(name: '$name'.toSlug);
 
   final String name;
   final String? url;

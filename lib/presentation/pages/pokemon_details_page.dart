@@ -17,9 +17,14 @@ class PokemonDetailsPage extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: BlocProvider.of<PokemonSwitcherCubit>(context)
-        ..switchPokemon(pokemon),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(
+          value: BlocProvider.of<PokemonSwitcherCubit>(context)
+            ..switchPokemon(pokemon),
+        ),
+        BlocProvider(create: (context) => EvolutionChainBloc()),
+      ],
       child: Builder(
         builder: (context) => Scaffold(
           body: CustomScrollView(
@@ -45,16 +50,21 @@ class PokemonDetailsPage extends StatelessWidget {
                     ),
                     const PokemonTypes(),
                     const PokemonWeightHeight(),
-                    const PokemonBaseStats()
+                    const PokemonBaseStats(),
+                    const PokemonAbilities(),
+                    // const EvolutionChain(),
+                    const PokemonMoves()
                   ]
                       .map(
-                        (e) => Padding(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8,
-                            horizontal: 16,
-                          ),
-                          child: e,
-                        ),
+                        (e) => e is PokemonMoves || e is PokemonAbilities
+                            ? e
+                            : Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 8,
+                                  horizontal: 16,
+                                ),
+                                child: e,
+                              ),
                       )
                       .toList(),
                 ),

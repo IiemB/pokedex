@@ -11,10 +11,17 @@ import 'package:pokedex/utils/utils.dart';
 class PokemonCard extends StatelessWidget {
   final Pokemon pokemon;
 
+  final bool _isKeyed;
+
   const PokemonCard({
     super.key,
     required this.pokemon,
-  });
+  }) : _isKeyed = true;
+
+  const PokemonCard.evolution({
+    super.key,
+    required this.pokemon,
+  }) : _isKeyed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,38 +40,13 @@ class PokemonCard extends StatelessWidget {
             onTap: () => state.mapOrNull<void>(
               loaded: (value) {
                 FocusScope.of(context).unfocus();
-                router
-                    .push(
-                  PokemonDetailsRoute(
-                    pokemon: pokemon,
-                    pokemons:
-                        BlocProvider.of<SearchPokemonCubit>(context).state,
-                  ),
-                )
-                    .whenComplete(() {
-                  // final pokemon =
-                  //     BlocProvider.of<PokemonSwitcherCubit>(context).state;
-
-                  // final valueContext =
-                  //     GlobalObjectKey(pokemon.name).currentContext;
-
-                  // if (valueContext == null) {
-                  //   return;
-                  // }
-
-                  // final scrollPosition = Scrollable.of(valueContext).position;
-                  // final renderObject = valueContext.findRenderObject();
-
-                  // if (renderObject == null) {
-                  //   return;
-                  // }
-
-                  // scrollPosition.ensureVisible(
-                  //   renderObject,
-                  //   duration: const Duration(milliseconds: 400),
-                  //   alignment: 0.2,
-                  // );
-                });
+                final route = PokemonDetailsRoute(
+                  pokemon: pokemon,
+                  pokemons: BlocProvider.of<SearchPokemonCubit>(context).state,
+                );
+                if (_isKeyed) {
+                  router.push(route);
+                }
               },
             ),
             child: Stack(
@@ -73,7 +55,7 @@ class PokemonCard extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.fromLTRB(16, 16, 16, 32.sp),
                   child: Hero(
-                    key: GlobalObjectKey(pokemon.name),
+                    key: _isKeyed ? GlobalObjectKey(pokemon.name) : UniqueKey(),
                     tag: pokemon.name,
                     child: state.maybeMap(
                       orElse: () => Assets.images.icon.image(),

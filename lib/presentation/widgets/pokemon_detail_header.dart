@@ -24,6 +24,7 @@ class PokemonDetailHeader extends StatelessWidget {
 
           return SliverAppBar(
             expandedHeight: context.height / 3,
+            floating: true,
             backgroundColor: backgroundColor,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

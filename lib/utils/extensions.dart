@@ -81,6 +81,10 @@ extension StringExtension on String {
     }
     return result;
   }
+
+  String get formSlugThenCapitalized => replaceAll('-', ' ').capitalizeAllWords;
+
+  String get toSlug => toLowerCase().replaceAll(' ', '-');
 }
 
 extension ThemeDataExtension on ThemeData {

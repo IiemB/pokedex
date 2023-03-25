@@ -22,9 +22,20 @@ class PokedexRepositoyImpl implements PokedexRepository {
   }
 
   @override
-  Future<Either<Failure, PokemonDetails>> getPokemonDetails(String url) async {
+  Future<Either<Failure, PokemonDetails>> getPokemonDetails(String name) async {
     try {
-      final result = await _remoteDatasources.getPokemonDetail(url);
+      final result = await _remoteDatasources.getPokemonDetail(name);
+
+      return right(result);
+    } catch (e) {
+      return left(Failure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Evolution>> getEvolutionChain(int id) async {
+    try {
+      final result = await _remoteDatasources.getEvolutionChain(id);
 
       return right(result);
     } catch (e) {

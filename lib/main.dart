@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => PokemonListBloc()),
           BlocProvider(create: (context) => SettingsCubit()),
           BlocProvider(create: (context) => PokemonSwitcherCubit(Pokemon())),
+          BlocProvider(create: (context) => SearchPokemonCubit()),
         ],
         child: BlocBuilder<SettingsCubit, SettingsState>(
           builder: (context, state) => MaterialApp.router(
