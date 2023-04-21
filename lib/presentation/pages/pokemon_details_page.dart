@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,8 +6,9 @@ import 'package:pokedex/data/data.dart';
 import 'package:pokedex/presentation/presentation.dart';
 import 'package:pokedex/utils/utils.dart';
 
+@RoutePage()
 class PokemonDetailsPage extends StatelessWidget {
-  static const routeName = 'pokemon-details';
+  static const routeName = '/pokemon-details';
 
   final Pokemon pokemon;
   final List<Pokemon> pokemons;
@@ -29,9 +31,7 @@ class PokemonDetailsPage extends StatelessWidget {
         builder: (context) => Scaffold(
           body: CustomScrollView(
             slivers: [
-              PokemonDetailHeader(
-                pokemons: pokemons,
-              ),
+              PokemonDetailHeader(pokemons: pokemons),
               SliverList(
                 delegate: SliverChildListDelegate(
                   [

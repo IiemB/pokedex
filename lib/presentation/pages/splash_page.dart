@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -5,6 +6,7 @@ import 'package:pokedex/core/core.dart';
 import 'package:pokedex/presentation/presentation.dart';
 import 'package:pokedex/utils/utils.dart';
 
+@RoutePage()
 class SplashPage extends StatelessWidget {
   static const routeName = '/';
   const SplashPage({super.key});

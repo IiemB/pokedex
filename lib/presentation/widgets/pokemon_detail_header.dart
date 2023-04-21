@@ -52,7 +52,7 @@ class PokemonDetailHeader extends StatelessWidget {
             leading: IconButton(
               onPressed: router.pop,
               icon: Icon(
-                Icons.chevron_left_rounded,
+                Icons.arrow_back_ios_new,
                 color: backgroundColor.getContrastColor,
               ),
             ),
@@ -61,10 +61,17 @@ class PokemonDetailHeader extends StatelessWidget {
                 bottom: Radius.circular(12),
               ),
             ),
-            flexibleSpace: FlexibleSpaceBar(
-              background: PokemonImagesCarousel(
-                pokemons: pokemons,
+            // flexibleSpace: FlexibleSpaceBar(
+            //   background: PokemonImagesCarousel(
+            //     pokemons: pokemons,
+            //   ),
+            // ),
+            flexibleSpace: Padding(
+              padding: const EdgeInsets.only(
+                top: 24 + kToolbarHeight,
+                bottom: 8,
               ),
+              child: Center(child: PokemonHeaderImage(pokemon: pokemon)),
             ),
           );
         },

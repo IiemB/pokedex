@@ -1,44 +1,29 @@
-// **************************************************************************
-// AutoRouteGenerator
-// **************************************************************************
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// AutoRouteGenerator
+// AutoRouterGenerator
 // **************************************************************************
-//
+
 // ignore_for_file: type=lint
+// coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:flutter/foundation.dart' as _i4;
-import 'package:flutter/material.dart' as _i3;
+import 'package:auto_route/auto_route.dart' as _i5;
+import 'package:flutter/material.dart' as _i6;
+import 'package:pokedex/data/data.dart' as _i7;
+import 'package:pokedex/presentation/pages/home_page.dart' as _i3;
+import 'package:pokedex/presentation/pages/pokemon_details_page.dart' as _i1;
+import 'package:pokedex/presentation/pages/settings_page.dart' as _i4;
+import 'package:pokedex/presentation/pages/splash_page.dart' as _i2;
 
-import '../data/data.dart' as _i5;
-import '../presentation/presentation.dart' as _i1;
-
-class AppRouter extends _i2.RootStackRouter {
-  AppRouter([_i3.GlobalKey<_i3.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
+abstract class $AppRouter extends _i5.RootStackRouter {
+  $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i2.PageFactory> pagesMap = {
-    SplashRoute.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i1.SplashPage(),
-      );
-    },
-    HomeRoute.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
-        routeData: routeData,
-        child: const _i1.HomePage(),
-      );
-    },
+  final Map<String, _i5.PageFactory> pagesMap = {
     PokemonDetailsRoute.name: (routeData) {
       final args = routeData.argsAs<PokemonDetailsRouteArgs>();
-      return _i2.MaterialPageX<dynamic>(
+      return _i5.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i1.PokemonDetailsPage(
           key: args.key,
@@ -47,77 +32,49 @@ class AppRouter extends _i2.RootStackRouter {
         ),
       );
     },
-    SettingsRoute.name: (routeData) {
-      return _i2.MaterialPageX<dynamic>(
+    SplashRoute.name: (routeData) {
+      return _i5.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.SettingsPage(),
+        child: const _i2.SplashPage(),
+      );
+    },
+    HomeRoute.name: (routeData) {
+      return _i5.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i3.HomePage(),
+      );
+    },
+    SettingsRoute.name: (routeData) {
+      return _i5.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i4.SettingsPage(),
       );
     },
   };
-
-  @override
-  List<_i2.RouteConfig> get routes => [
-        _i2.RouteConfig(
-          SplashRoute.name,
-          path: '/',
-        ),
-        _i2.RouteConfig(
-          HomeRoute.name,
-          path: 'home',
-        ),
-        _i2.RouteConfig(
-          PokemonDetailsRoute.name,
-          path: 'pokemon-details',
-        ),
-        _i2.RouteConfig(
-          SettingsRoute.name,
-          path: 'settings',
-        ),
-      ];
-}
-
-/// generated route for
-/// [_i1.SplashPage]
-class SplashRoute extends _i2.PageRouteInfo<void> {
-  const SplashRoute()
-      : super(
-          SplashRoute.name,
-          path: '/',
-        );
-
-  static const String name = 'SplashRoute';
-}
-
-/// generated route for
-/// [_i1.HomePage]
-class HomeRoute extends _i2.PageRouteInfo<void> {
-  const HomeRoute()
-      : super(
-          HomeRoute.name,
-          path: 'home',
-        );
-
-  static const String name = 'HomeRoute';
 }
 
 /// generated route for
 /// [_i1.PokemonDetailsPage]
-class PokemonDetailsRoute extends _i2.PageRouteInfo<PokemonDetailsRouteArgs> {
+class PokemonDetailsRoute extends _i5.PageRouteInfo<PokemonDetailsRouteArgs> {
   PokemonDetailsRoute({
-    _i4.Key? key,
-    required _i5.Pokemon pokemon,
-    required List<_i5.Pokemon> pokemons,
+    _i6.Key? key,
+    required _i7.Pokemon pokemon,
+    required List<_i7.Pokemon> pokemons,
+    List<_i5.PageRouteInfo>? children,
   }) : super(
           PokemonDetailsRoute.name,
-          path: 'pokemon-details',
           args: PokemonDetailsRouteArgs(
             key: key,
             pokemon: pokemon,
             pokemons: pokemons,
           ),
+          initialChildren: children,
         );
 
   static const String name = 'PokemonDetailsRoute';
+
+  static const _i5.PageInfo<PokemonDetailsRouteArgs> page =
+      _i5.PageInfo<PokemonDetailsRouteArgs>(name);
 }
 
 class PokemonDetailsRouteArgs {
@@ -127,11 +84,11 @@ class PokemonDetailsRouteArgs {
     required this.pokemons,
   });
 
-  final _i4.Key? key;
+  final _i6.Key? key;
 
-  final _i5.Pokemon pokemon;
+  final _i7.Pokemon pokemon;
 
-  final List<_i5.Pokemon> pokemons;
+  final List<_i7.Pokemon> pokemons;
 
   @override
   String toString() {
@@ -140,13 +97,43 @@ class PokemonDetailsRouteArgs {
 }
 
 /// generated route for
-/// [_i1.SettingsPage]
-class SettingsRoute extends _i2.PageRouteInfo<void> {
-  const SettingsRoute()
+/// [_i2.SplashPage]
+class SplashRoute extends _i5.PageRouteInfo<void> {
+  const SplashRoute({List<_i5.PageRouteInfo>? children})
+      : super(
+          SplashRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SplashRoute';
+
+  static const _i5.PageInfo<void> page = _i5.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i3.HomePage]
+class HomeRoute extends _i5.PageRouteInfo<void> {
+  const HomeRoute({List<_i5.PageRouteInfo>? children})
+      : super(
+          HomeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeRoute';
+
+  static const _i5.PageInfo<void> page = _i5.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i4.SettingsPage]
+class SettingsRoute extends _i5.PageRouteInfo<void> {
+  const SettingsRoute({List<_i5.PageRouteInfo>? children})
       : super(
           SettingsRoute.name,
-          path: 'settings',
+          initialChildren: children,
         );
 
   static const String name = 'SettingsRoute';
+
+  static const _i5.PageInfo<void> page = _i5.PageInfo<void>(name);
 }

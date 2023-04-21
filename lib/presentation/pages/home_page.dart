@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
@@ -8,8 +9,9 @@ import 'package:pokedex/data/data.dart';
 import 'package:pokedex/presentation/presentation.dart';
 import 'package:pokedex/utils/utils.dart';
 
+@RoutePage()
 class HomePage extends StatefulWidget {
-  static const routeName = 'home';
+  static const routeName = '/home';
 
   const HomePage({super.key});
 
