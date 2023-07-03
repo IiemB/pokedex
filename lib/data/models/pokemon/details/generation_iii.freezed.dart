@@ -229,11 +229,11 @@ class _$_GenerationIii implements _GenerationIii {
 
 abstract class _GenerationIii implements GenerationIii {
   factory _GenerationIii(
-      {final Emerald? emerald,
-      @JsonKey(name: 'firered-leafgreen')
+          {final Emerald? emerald,
+          @JsonKey(name: 'firered-leafgreen')
           final FireredLeafgreen? fireredLeafgreen,
-      @JsonKey(name: 'ruby-sapphire')
-          final RubySapphire? rubySapphire}) = _$_GenerationIii;
+          @JsonKey(name: 'ruby-sapphire') final RubySapphire? rubySapphire}) =
+      _$_GenerationIii;
 
   factory _GenerationIii.fromJson(Map<String, dynamic> json) =
       _$_GenerationIii.fromJson;

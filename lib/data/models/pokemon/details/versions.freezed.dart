@@ -413,22 +413,15 @@ class _$_Versions implements _Versions {
 
 abstract class _Versions implements Versions {
   factory _Versions(
-      {@JsonKey(name: 'generation-i')
-          final GenerationI? generationI,
-      @JsonKey(name: 'generation-ii')
-          final GenerationIi? generationIi,
-      @JsonKey(name: 'generation-iii')
-          final GenerationIii? generationIii,
-      @JsonKey(name: 'generation-iv')
-          final GenerationIv? generationIv,
-      @JsonKey(name: 'generation-v')
-          final GenerationV? generationV,
-      @JsonKey(name: 'generation-vi')
-          final GenerationVi? generationVi,
-      @JsonKey(name: 'generation-vii')
-          final GenerationVii? generationVii,
+      {@JsonKey(name: 'generation-i') final GenerationI? generationI,
+      @JsonKey(name: 'generation-ii') final GenerationIi? generationIi,
+      @JsonKey(name: 'generation-iii') final GenerationIii? generationIii,
+      @JsonKey(name: 'generation-iv') final GenerationIv? generationIv,
+      @JsonKey(name: 'generation-v') final GenerationV? generationV,
+      @JsonKey(name: 'generation-vi') final GenerationVi? generationVi,
+      @JsonKey(name: 'generation-vii') final GenerationVii? generationVii,
       @JsonKey(name: 'generation-viii')
-          final GenerationViii? generationViii}) = _$_Versions;
+      final GenerationViii? generationViii}) = _$_Versions;
 
   factory _Versions.fromJson(Map<String, dynamic> json) = _$_Versions.fromJson;
 

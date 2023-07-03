@@ -206,14 +206,11 @@ class _$_UltraSunUltraMoon implements _UltraSunUltraMoon {
 
 abstract class _UltraSunUltraMoon implements UltraSunUltraMoon {
   factory _UltraSunUltraMoon(
-      {@JsonKey(name: 'front_default')
-          final String? frontDefault,
-      @JsonKey(name: 'front_female')
-          final String? frontFemale,
-      @JsonKey(name: 'front_shiny')
-          final String? frontShiny,
+      {@JsonKey(name: 'front_default') final String? frontDefault,
+      @JsonKey(name: 'front_female') final String? frontFemale,
+      @JsonKey(name: 'front_shiny') final String? frontShiny,
       @JsonKey(name: 'front_shiny_female')
-          final String? frontShinyFemale}) = _$_UltraSunUltraMoon;
+      final String? frontShinyFemale}) = _$_UltraSunUltraMoon;
 
   factory _UltraSunUltraMoon.fromJson(Map<String, dynamic> json) =
       _$_UltraSunUltraMoon.fromJson;

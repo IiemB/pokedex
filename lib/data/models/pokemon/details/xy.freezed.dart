@@ -197,14 +197,11 @@ class _$_Xy implements _Xy {
 
 abstract class _Xy implements Xy {
   factory _Xy(
-      {@JsonKey(name: 'front_default')
-          final String? frontDefault,
-      @JsonKey(name: 'front_female')
-          final String? frontFemale,
-      @JsonKey(name: 'front_shiny')
-          final String? frontShiny,
+      {@JsonKey(name: 'front_default') final String? frontDefault,
+      @JsonKey(name: 'front_female') final String? frontFemale,
+      @JsonKey(name: 'front_shiny') final String? frontShiny,
       @JsonKey(name: 'front_shiny_female')
-          final String? frontShinyFemale}) = _$_Xy;
+      final String? frontShinyFemale}) = _$_Xy;
 
   factory _Xy.fromJson(Map<String, dynamic> json) = _$_Xy.fromJson;
 

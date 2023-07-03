@@ -41,11 +41,9 @@ abstract class $ChainCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'evolution_details')
-          List<EvolutionDetail>? evolutionDetails,
-      @JsonKey(name: 'evolves_to')
-          List<EvolvesTo>? evolvesTo,
-      @JsonKey(name: 'is_baby')
-          bool? isBaby,
+      List<EvolutionDetail>? evolutionDetails,
+      @JsonKey(name: 'evolves_to') List<EvolvesTo>? evolvesTo,
+      @JsonKey(name: 'is_baby') bool? isBaby,
       Species? species});
 
   $SpeciesCopyWith<$Res>? get species;
@@ -110,11 +108,9 @@ abstract class _$$_ChainCopyWith<$Res> implements $ChainCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'evolution_details')
-          List<EvolutionDetail>? evolutionDetails,
-      @JsonKey(name: 'evolves_to')
-          List<EvolvesTo>? evolvesTo,
-      @JsonKey(name: 'is_baby')
-          bool? isBaby,
+      List<EvolutionDetail>? evolutionDetails,
+      @JsonKey(name: 'evolves_to') List<EvolvesTo>? evolvesTo,
+      @JsonKey(name: 'is_baby') bool? isBaby,
       Species? species});
 
   @override
@@ -161,11 +157,9 @@ class __$$_ChainCopyWithImpl<$Res> extends _$ChainCopyWithImpl<$Res, _$_Chain>
 class _$_Chain implements _Chain {
   _$_Chain(
       {@JsonKey(name: 'evolution_details')
-          final List<EvolutionDetail>? evolutionDetails,
-      @JsonKey(name: 'evolves_to')
-          final List<EvolvesTo>? evolvesTo,
-      @JsonKey(name: 'is_baby')
-          this.isBaby,
+      final List<EvolutionDetail>? evolutionDetails,
+      @JsonKey(name: 'evolves_to') final List<EvolvesTo>? evolvesTo,
+      @JsonKey(name: 'is_baby') this.isBaby,
       this.species})
       : _evolutionDetails = evolutionDetails,
         _evolvesTo = evolvesTo;
@@ -246,11 +240,9 @@ class _$_Chain implements _Chain {
 abstract class _Chain implements Chain {
   factory _Chain(
       {@JsonKey(name: 'evolution_details')
-          final List<EvolutionDetail>? evolutionDetails,
-      @JsonKey(name: 'evolves_to')
-          final List<EvolvesTo>? evolvesTo,
-      @JsonKey(name: 'is_baby')
-          final bool? isBaby,
+      final List<EvolutionDetail>? evolutionDetails,
+      @JsonKey(name: 'evolves_to') final List<EvolvesTo>? evolvesTo,
+      @JsonKey(name: 'is_baby') final bool? isBaby,
       final Species? species}) = _$_Chain;
 
   factory _Chain.fromJson(Map<String, dynamic> json) = _$_Chain.fromJson;

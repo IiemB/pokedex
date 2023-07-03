@@ -42,11 +42,9 @@ abstract class $EvolvesToCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'evolution_details')
-          List<EvolutionDetail>? evolutionDetails,
-      @JsonKey(name: 'evolves_to')
-          List<EvolvesTo>? evolvesTo,
-      @JsonKey(name: 'is_baby')
-          bool? isBaby,
+      List<EvolutionDetail>? evolutionDetails,
+      @JsonKey(name: 'evolves_to') List<EvolvesTo>? evolvesTo,
+      @JsonKey(name: 'is_baby') bool? isBaby,
       Species? species});
 
   $SpeciesCopyWith<$Res>? get species;
@@ -112,11 +110,9 @@ abstract class _$$_EvolvesToCopyWith<$Res> implements $EvolvesToCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'evolution_details')
-          List<EvolutionDetail>? evolutionDetails,
-      @JsonKey(name: 'evolves_to')
-          List<EvolvesTo>? evolvesTo,
-      @JsonKey(name: 'is_baby')
-          bool? isBaby,
+      List<EvolutionDetail>? evolutionDetails,
+      @JsonKey(name: 'evolves_to') List<EvolvesTo>? evolvesTo,
+      @JsonKey(name: 'is_baby') bool? isBaby,
       Species? species});
 
   @override
@@ -165,11 +161,9 @@ class __$$_EvolvesToCopyWithImpl<$Res>
 class _$_EvolvesTo implements _EvolvesTo {
   _$_EvolvesTo(
       {@JsonKey(name: 'evolution_details')
-          final List<EvolutionDetail>? evolutionDetails,
-      @JsonKey(name: 'evolves_to')
-          final List<EvolvesTo>? evolvesTo,
-      @JsonKey(name: 'is_baby')
-          this.isBaby,
+      final List<EvolutionDetail>? evolutionDetails,
+      @JsonKey(name: 'evolves_to') final List<EvolvesTo>? evolvesTo,
+      @JsonKey(name: 'is_baby') this.isBaby,
       this.species})
       : _evolutionDetails = evolutionDetails,
         _evolvesTo = evolvesTo;
@@ -250,11 +244,9 @@ class _$_EvolvesTo implements _EvolvesTo {
 abstract class _EvolvesTo implements EvolvesTo {
   factory _EvolvesTo(
       {@JsonKey(name: 'evolution_details')
-          final List<EvolutionDetail>? evolutionDetails,
-      @JsonKey(name: 'evolves_to')
-          final List<EvolvesTo>? evolvesTo,
-      @JsonKey(name: 'is_baby')
-          final bool? isBaby,
+      final List<EvolutionDetail>? evolutionDetails,
+      @JsonKey(name: 'evolves_to') final List<EvolvesTo>? evolvesTo,
+      @JsonKey(name: 'is_baby') final bool? isBaby,
       final Species? species}) = _$_EvolvesTo;
 
   factory _EvolvesTo.fromJson(Map<String, dynamic> json) =

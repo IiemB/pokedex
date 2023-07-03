@@ -209,14 +209,11 @@ class _$_OmegarubyAlphasapphire implements _OmegarubyAlphasapphire {
 
 abstract class _OmegarubyAlphasapphire implements OmegarubyAlphasapphire {
   factory _OmegarubyAlphasapphire(
-      {@JsonKey(name: 'front_default')
-          final String? frontDefault,
-      @JsonKey(name: 'front_female')
-          final String? frontFemale,
-      @JsonKey(name: 'front_shiny')
-          final String? frontShiny,
+      {@JsonKey(name: 'front_default') final String? frontDefault,
+      @JsonKey(name: 'front_female') final String? frontFemale,
+      @JsonKey(name: 'front_shiny') final String? frontShiny,
       @JsonKey(name: 'front_shiny_female')
-          final String? frontShinyFemale}) = _$_OmegarubyAlphasapphire;
+      final String? frontShinyFemale}) = _$_OmegarubyAlphasapphire;
 
   factory _OmegarubyAlphasapphire.fromJson(Map<String, dynamic> json) =
       _$_OmegarubyAlphasapphire.fromJson;

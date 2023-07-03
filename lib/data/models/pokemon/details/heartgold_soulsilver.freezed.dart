@@ -294,22 +294,15 @@ class _$_HeartgoldSoulsilver implements _HeartgoldSoulsilver {
 
 abstract class _HeartgoldSoulsilver implements HeartgoldSoulsilver {
   factory _HeartgoldSoulsilver(
-      {@JsonKey(name: 'back_default')
-          final String? backDefault,
-      @JsonKey(name: 'back_female')
-          final String? backFemale,
-      @JsonKey(name: 'back_shiny')
-          final String? backShiny,
-      @JsonKey(name: 'back_shiny_female')
-          final String? backShinyFemale,
-      @JsonKey(name: 'front_default')
-          final String? frontDefault,
-      @JsonKey(name: 'front_female')
-          final String? frontFemale,
-      @JsonKey(name: 'front_shiny')
-          final String? frontShiny,
+      {@JsonKey(name: 'back_default') final String? backDefault,
+      @JsonKey(name: 'back_female') final String? backFemale,
+      @JsonKey(name: 'back_shiny') final String? backShiny,
+      @JsonKey(name: 'back_shiny_female') final String? backShinyFemale,
+      @JsonKey(name: 'front_default') final String? frontDefault,
+      @JsonKey(name: 'front_female') final String? frontFemale,
+      @JsonKey(name: 'front_shiny') final String? frontShiny,
       @JsonKey(name: 'front_shiny_female')
-          final String? frontShinyFemale}) = _$_HeartgoldSoulsilver;
+      final String? frontShinyFemale}) = _$_HeartgoldSoulsilver;
 
   factory _HeartgoldSoulsilver.fromJson(Map<String, dynamic> json) =
       _$_HeartgoldSoulsilver.fromJson;

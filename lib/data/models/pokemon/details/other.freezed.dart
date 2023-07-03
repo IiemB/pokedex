@@ -223,11 +223,10 @@ class _$_Other implements _Other {
 
 abstract class _Other implements Other {
   factory _Other(
-      {@JsonKey(name: 'dream_world')
-          final DreamWorld? dreamWorld,
+      {@JsonKey(name: 'dream_world') final DreamWorld? dreamWorld,
       final Home? home,
       @JsonKey(name: 'official-artwork')
-          final OfficialArtwork? officialArtwork}) = _$_Other;
+      final OfficialArtwork? officialArtwork}) = _$_Other;
 
   factory _Other.fromJson(Map<String, dynamic> json) = _$_Other.fromJson;
 

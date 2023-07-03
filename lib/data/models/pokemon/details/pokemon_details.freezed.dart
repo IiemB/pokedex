@@ -480,17 +480,14 @@ class _$_PokemonDetails implements _PokemonDetails {
 abstract class _PokemonDetails implements PokemonDetails {
   factory _PokemonDetails(
       {final List<Ability>? abilities,
-      @JsonKey(name: 'base_experience')
-          final int? baseExperience,
+      @JsonKey(name: 'base_experience') final int? baseExperience,
       final List<Form>? forms,
-      @JsonKey(name: 'game_indices')
-          final List<GameIndex>? gameIndices,
+      @JsonKey(name: 'game_indices') final List<GameIndex>? gameIndices,
       final int? height,
       final int? id,
-      @JsonKey(name: 'is_default')
-          final bool? isDefault,
+      @JsonKey(name: 'is_default') final bool? isDefault,
       @JsonKey(name: 'location_area_encounters')
-          final String? locationAreaEncounters,
+      final String? locationAreaEncounters,
       final List<Move>? moves,
       final String? name,
       final int? order,

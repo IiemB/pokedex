@@ -40,7 +40,7 @@ abstract class $GenerationViiCopyWith<$Res> {
   $Res call(
       {Icons? icons,
       @JsonKey(name: 'ultra-sun-ultra-moon')
-          UltraSunUltraMoon? ultraSunUltraMoon});
+      UltraSunUltraMoon? ultraSunUltraMoon});
 
   $IconsCopyWith<$Res>? get icons;
   $UltraSunUltraMoonCopyWith<$Res>? get ultraSunUltraMoon;
@@ -110,7 +110,7 @@ abstract class _$$_GenerationViiCopyWith<$Res>
   $Res call(
       {Icons? icons,
       @JsonKey(name: 'ultra-sun-ultra-moon')
-          UltraSunUltraMoon? ultraSunUltraMoon});
+      UltraSunUltraMoon? ultraSunUltraMoon});
 
   @override
   $IconsCopyWith<$Res>? get icons;
@@ -198,7 +198,7 @@ abstract class _GenerationVii implements GenerationVii {
   factory _GenerationVii(
       {final Icons? icons,
       @JsonKey(name: 'ultra-sun-ultra-moon')
-          final UltraSunUltraMoon? ultraSunUltraMoon}) = _$_GenerationVii;
+      final UltraSunUltraMoon? ultraSunUltraMoon}) = _$_GenerationVii;
 
   factory _GenerationVii.fromJson(Map<String, dynamic> json) =
       _$_GenerationVii.fromJson;

@@ -42,12 +42,10 @@ abstract class $VersionGroupDetailCopyWith<$Res> {
       _$VersionGroupDetailCopyWithImpl<$Res, VersionGroupDetail>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'level_learned_at')
-          int? levelLearnedAt,
+      {@JsonKey(name: 'level_learned_at') int? levelLearnedAt,
       @JsonKey(name: 'move_learn_method')
-          MoveLearnMethodDetail? moveLearnMethodDetail,
-      @JsonKey(name: 'version_group')
-          VersionGroupDetail? versionGroupDetail});
+      MoveLearnMethodDetail? moveLearnMethodDetail,
+      @JsonKey(name: 'version_group') VersionGroupDetail? versionGroupDetail});
 
   $MoveLearnMethodDetailCopyWith<$Res>? get moveLearnMethodDetail;
   $VersionGroupDetailCopyWith<$Res>? get versionGroupDetail;
@@ -122,12 +120,10 @@ abstract class _$$_VersionGroupDetailCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'level_learned_at')
-          int? levelLearnedAt,
+      {@JsonKey(name: 'level_learned_at') int? levelLearnedAt,
       @JsonKey(name: 'move_learn_method')
-          MoveLearnMethodDetail? moveLearnMethodDetail,
-      @JsonKey(name: 'version_group')
-          VersionGroupDetail? versionGroupDetail});
+      MoveLearnMethodDetail? moveLearnMethodDetail,
+      @JsonKey(name: 'version_group') VersionGroupDetail? versionGroupDetail});
 
   @override
   $MoveLearnMethodDetailCopyWith<$Res>? get moveLearnMethodDetail;
@@ -228,13 +224,11 @@ class _$_VersionGroupDetail implements _VersionGroupDetail {
 
 abstract class _VersionGroupDetail implements VersionGroupDetail {
   factory _VersionGroupDetail(
-          {@JsonKey(name: 'level_learned_at')
-              final int? levelLearnedAt,
-          @JsonKey(name: 'move_learn_method')
-              final MoveLearnMethodDetail? moveLearnMethodDetail,
-          @JsonKey(name: 'version_group')
-              final VersionGroupDetail? versionGroupDetail}) =
-      _$_VersionGroupDetail;
+      {@JsonKey(name: 'level_learned_at') final int? levelLearnedAt,
+      @JsonKey(name: 'move_learn_method')
+      final MoveLearnMethodDetail? moveLearnMethodDetail,
+      @JsonKey(name: 'version_group')
+      final VersionGroupDetail? versionGroupDetail}) = _$_VersionGroupDetail;
 
   factory _VersionGroupDetail.fromJson(Map<String, dynamic> json) =
       _$_VersionGroupDetail.fromJson;

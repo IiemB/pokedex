@@ -40,9 +40,8 @@ abstract class $GenerationViCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'omegaruby-alphasapphire')
-          OmegarubyAlphasapphire? omegarubyAlphasapphire,
-      @JsonKey(name: 'x-y')
-          Xy? xY});
+      OmegarubyAlphasapphire? omegarubyAlphasapphire,
+      @JsonKey(name: 'x-y') Xy? xY});
 
   $OmegarubyAlphasapphireCopyWith<$Res>? get omegarubyAlphasapphire;
   $XyCopyWith<$Res>? get xY;
@@ -112,9 +111,8 @@ abstract class _$$_GenerationViCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'omegaruby-alphasapphire')
-          OmegarubyAlphasapphire? omegarubyAlphasapphire,
-      @JsonKey(name: 'x-y')
-          Xy? xY});
+      OmegarubyAlphasapphire? omegarubyAlphasapphire,
+      @JsonKey(name: 'x-y') Xy? xY});
 
   @override
   $OmegarubyAlphasapphireCopyWith<$Res>? get omegarubyAlphasapphire;
@@ -202,9 +200,8 @@ class _$_GenerationVi implements _GenerationVi {
 abstract class _GenerationVi implements GenerationVi {
   factory _GenerationVi(
       {@JsonKey(name: 'omegaruby-alphasapphire')
-          final OmegarubyAlphasapphire? omegarubyAlphasapphire,
-      @JsonKey(name: 'x-y')
-          final Xy? xY}) = _$_GenerationVi;
+      final OmegarubyAlphasapphire? omegarubyAlphasapphire,
+      @JsonKey(name: 'x-y') final Xy? xY}) = _$_GenerationVi;
 
   factory _GenerationVi.fromJson(Map<String, dynamic> json) =
       _$_GenerationVi.fromJson;

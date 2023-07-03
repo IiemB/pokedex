@@ -289,22 +289,17 @@ class _$_Crystal implements _Crystal {
 
 abstract class _Crystal implements Crystal {
   factory _Crystal(
-      {@JsonKey(name: 'back_default')
-          final String? backDefault,
-      @JsonKey(name: 'back_shiny')
-          final String? backShiny,
-      @JsonKey(name: 'back_shiny_transparent')
+          {@JsonKey(name: 'back_default') final String? backDefault,
+          @JsonKey(name: 'back_shiny') final String? backShiny,
+          @JsonKey(name: 'back_shiny_transparent')
           final String? backShinyTransparent,
-      @JsonKey(name: 'back_transparent')
-          final String? backTransparent,
-      @JsonKey(name: 'front_default')
-          final String? frontDefault,
-      @JsonKey(name: 'front_shiny')
-          final String? frontShiny,
-      @JsonKey(name: 'front_shiny_transparent')
+          @JsonKey(name: 'back_transparent') final String? backTransparent,
+          @JsonKey(name: 'front_default') final String? frontDefault,
+          @JsonKey(name: 'front_shiny') final String? frontShiny,
+          @JsonKey(name: 'front_shiny_transparent')
           final String? frontShinyTransparent,
-      @JsonKey(name: 'front_transparent')
-          final String? frontTransparent}) = _$_Crystal;
+          @JsonKey(name: 'front_transparent') final String? frontTransparent}) =
+      _$_Crystal;
 
   factory _Crystal.fromJson(Map<String, dynamic> json) = _$_Crystal.fromJson;
 

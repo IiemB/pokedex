@@ -37,10 +37,9 @@ abstract class $MoveCopyWith<$Res> {
       _$MoveCopyWithImpl<$Res, Move>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'move')
-          MoveDetail? moveDetail,
+      {@JsonKey(name: 'move') MoveDetail? moveDetail,
       @JsonKey(name: 'version_group_details')
-          List<VersionGroupDetail>? versionGroupDetails});
+      List<VersionGroupDetail>? versionGroupDetails});
 
   $MoveDetailCopyWith<$Res>? get moveDetail;
 }
@@ -93,10 +92,9 @@ abstract class _$$_MoveCopyWith<$Res> implements $MoveCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'move')
-          MoveDetail? moveDetail,
+      {@JsonKey(name: 'move') MoveDetail? moveDetail,
       @JsonKey(name: 'version_group_details')
-          List<VersionGroupDetail>? versionGroupDetails});
+      List<VersionGroupDetail>? versionGroupDetails});
 
   @override
   $MoveDetailCopyWith<$Res>? get moveDetail;
@@ -131,10 +129,9 @@ class __$$_MoveCopyWithImpl<$Res> extends _$MoveCopyWithImpl<$Res, _$_Move>
 @JsonSerializable()
 class _$_Move implements _Move {
   _$_Move(
-      {@JsonKey(name: 'move')
-          this.moveDetail,
+      {@JsonKey(name: 'move') this.moveDetail,
       @JsonKey(name: 'version_group_details')
-          final List<VersionGroupDetail>? versionGroupDetails})
+      final List<VersionGroupDetail>? versionGroupDetails})
       : _versionGroupDetails = versionGroupDetails;
 
   factory _$_Move.fromJson(Map<String, dynamic> json) => _$$_MoveFromJson(json);
@@ -191,10 +188,9 @@ class _$_Move implements _Move {
 
 abstract class _Move implements Move {
   factory _Move(
-      {@JsonKey(name: 'move')
-          final MoveDetail? moveDetail,
+      {@JsonKey(name: 'move') final MoveDetail? moveDetail,
       @JsonKey(name: 'version_group_details')
-          final List<VersionGroupDetail>? versionGroupDetails}) = _$_Move;
+      final List<VersionGroupDetail>? versionGroupDetails}) = _$_Move;
 
   factory _Move.fromJson(Map<String, dynamic> json) = _$_Move.fromJson;
 

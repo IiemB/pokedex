@@ -198,14 +198,11 @@ class _$_Home implements _Home {
 
 abstract class _Home implements Home {
   factory _Home(
-      {@JsonKey(name: 'front_default')
-          final String? frontDefault,
-      @JsonKey(name: 'front_female')
-          final String? frontFemale,
-      @JsonKey(name: 'front_shiny')
-          final String? frontShiny,
+      {@JsonKey(name: 'front_default') final String? frontDefault,
+      @JsonKey(name: 'front_female') final String? frontFemale,
+      @JsonKey(name: 'front_shiny') final String? frontShiny,
       @JsonKey(name: 'front_shiny_female')
-          final String? frontShinyFemale}) = _$_Home;
+      final String? frontShinyFemale}) = _$_Home;
 
   factory _Home.fromJson(Map<String, dynamic> json) = _$_Home.fromJson;
 

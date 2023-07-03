@@ -40,10 +40,9 @@ abstract class $GenerationIvCopyWith<$Res> {
       _$GenerationIvCopyWithImpl<$Res, GenerationIv>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'diamond-pearl')
-          DiamondPearl? diamondPearl,
+      {@JsonKey(name: 'diamond-pearl') DiamondPearl? diamondPearl,
       @JsonKey(name: 'heartgold-soulsilver')
-          HeartgoldSoulsilver? heartgoldSoulsilver,
+      HeartgoldSoulsilver? heartgoldSoulsilver,
       Platinum? platinum});
 
   $DiamondPearlCopyWith<$Res>? get diamondPearl;
@@ -131,10 +130,9 @@ abstract class _$$_GenerationIvCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'diamond-pearl')
-          DiamondPearl? diamondPearl,
+      {@JsonKey(name: 'diamond-pearl') DiamondPearl? diamondPearl,
       @JsonKey(name: 'heartgold-soulsilver')
-          HeartgoldSoulsilver? heartgoldSoulsilver,
+      HeartgoldSoulsilver? heartgoldSoulsilver,
       Platinum? platinum});
 
   @override
@@ -236,10 +234,9 @@ class _$_GenerationIv implements _GenerationIv {
 
 abstract class _GenerationIv implements GenerationIv {
   factory _GenerationIv(
-      {@JsonKey(name: 'diamond-pearl')
-          final DiamondPearl? diamondPearl,
+      {@JsonKey(name: 'diamond-pearl') final DiamondPearl? diamondPearl,
       @JsonKey(name: 'heartgold-soulsilver')
-          final HeartgoldSoulsilver? heartgoldSoulsilver,
+      final HeartgoldSoulsilver? heartgoldSoulsilver,
       final Platinum? platinum}) = _$_GenerationIv;
 
   factory _GenerationIv.fromJson(Map<String, dynamic> json) =
