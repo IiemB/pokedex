@@ -28,7 +28,6 @@ class SplashPage extends StatelessWidget {
         ),
       ),
       child: Scaffold(
-        appBar: AppBar(toolbarHeight: 1),
         body: Stack(
           children: [
             Center(
