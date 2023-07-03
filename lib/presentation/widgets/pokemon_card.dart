@@ -36,8 +36,10 @@ class PokemonCard extends StatelessWidget {
                   anchor: Alignment.topCenter,
                 )
                 .translate(
-                  y: effect.childSize.height * phase.leading,
-                ),
+                  y: effect.childSize.width * phase.leading,
+                  anchor: Alignment.topCenter,
+                )
+                .opacity(phase.leadingLerp(from: 1, to: 0)),
             child: _PokemonCard(pokemon: pokemon, isKeyed: _isKeyed),
           );
         }

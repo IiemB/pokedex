@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:gap/gap.dart';
 import 'package:pokedex/data/data.dart';
 import 'package:pokedex/presentation/presentation.dart';
@@ -46,14 +43,15 @@ class _HomePageState extends State<HomePage> {
           controller: _scrollController,
           slivers: [
             // Handle slow animated padding on notched IPhone
-            if (Platform.isIOS) ...[
+            // if (Platform.isIOS)
+            ...[
               SliverAppBar(
                 backgroundColor: context.theme.primaryColor,
                 titleTextStyle:
                     context.theme.appBarTheme.titleTextStyle?.copyWith(
                   color: context.theme.colorScheme.onPrimary,
                 ),
-                floating: true,
+                // floating: true,
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(12),
@@ -70,24 +68,25 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               _PokemonList(searchController: _searchController)
-            ] else
-              SliverStickyHeader.builder(
-                builder: (context, state) {
-                  return AnimatedPadding(
-                    duration: const Duration(milliseconds: 100),
-                    padding: EdgeInsets.only(
-                      top: state.isPinned
-                          ? MediaQuery.of(context).padding.top
-                          : 0,
-                    ),
-                    child: _SearchPokemonField(
-                      searchController: _searchController,
-                      scrollController: _scrollController,
-                    ),
-                  );
-                },
-                sliver: _PokemonList(searchController: _searchController),
-              ),
+            ],
+            // else
+            //   SliverStickyHeader.builder(
+            //     builder: (context, state) {
+            //       return AnimatedPadding(
+            //         duration: const Duration(milliseconds: 100),
+            //         padding: EdgeInsets.only(
+            //           top: state.isPinned
+            //               ? MediaQuery.of(context).padding.top
+            //               : 0,
+            //         ),
+            //         child: _SearchPokemonField(
+            //           searchController: _searchController,
+            //           scrollController: _scrollController,
+            //         ),
+            //       );
+            //     },
+            //     sliver: _PokemonList(searchController: _searchController),
+            //   ),
             BlocBuilder<PokemonListBloc, PokemonListState>(
               buildWhen: (previous, current) => current.maybeMap(
                 orElse: () => false,
@@ -167,6 +166,7 @@ class _PokemonList extends StatelessWidget {
 
                   return PokemonCard(pokemon: pokemon);
                 },
+                itemCount: pokemons.length,
               );
             },
           ),
@@ -213,31 +213,32 @@ class _SearchPokemonField extends StatelessWidget {
           decoration: InputDecoration(
             prefixIcon: const Icon(Icons.search),
             hintText: 'Search Pokemon',
+            hoverColor: Colors.transparent,
             suffixIcon: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                BlocBuilder<SearchPokemonCubit, List<Pokemon>>(
-                  builder: (context, state) {
-                    final lenght = state.length;
+                // BlocBuilder<SearchPokemonCubit, List<Pokemon>>(
+                //   builder: (context, state) {
+                //     final lenght = state.length;
 
-                    if (lenght <= 0) return const SizedBox.shrink();
+                //     if (lenght <= 0) return const SizedBox.shrink();
 
-                    return AnimatedContainer(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        color: context.theme.colorScheme.onPrimary,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      duration: const Duration(milliseconds: 200),
-                      child: Text(
-                        lenght.toString(),
-                        style: TextStyle(
-                          color: context.theme.colorScheme.primary,
-                        ),
-                      ),
-                    );
-                  },
-                ),
+                //     return AnimatedContainer(
+                //       padding: const EdgeInsets.all(4),
+                //       decoration: BoxDecoration(
+                //         color: context.theme.colorScheme.onPrimary,
+                //         borderRadius: BorderRadius.circular(8),
+                //       ),
+                //       duration: const Duration(milliseconds: 200),
+                //       child: Text(
+                //         lenght.toString(),
+                //         style: TextStyle(
+                //           color: context.theme.colorScheme.primary,
+                //         ),
+                //       ),
+                //     );
+                //   },
+                // ),
                 IconButton(
                   tooltip: 'Settings',
                   onPressed: () => showDialog(

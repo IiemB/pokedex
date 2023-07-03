@@ -1,10 +1,13 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pokedex/common/common.dart';
 import 'package:pokedex/core/core.dart';
 import 'package:pokedex/presentation/presentation.dart';
 import 'package:pokedex/utils/utils.dart';
+
+typedef GridCount = ({IconData icon, String name, int value});
 
 class SettingsDialogue extends StatefulWidget {
   const SettingsDialogue({super.key});
@@ -16,6 +19,12 @@ class SettingsDialogue extends StatefulWidget {
 class _SettingsDialogueState extends State<SettingsDialogue> {
   final _popUpMenuThemeKey = GlobalKey<PopupMenuButtonState>();
   final _popUpMenuGridKey = GlobalKey<PopupMenuButtonState>();
+
+  static const _gridCount = [
+    (name: 'one', value: 1, icon: Icons.square_outlined),
+    (name: 'two', value: 2, icon: Icons.grid_view_outlined),
+    (name: 'three', value: 3, icon: Icons.grid_on_sharp)
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -123,18 +132,43 @@ class _SettingsDialogueState extends State<SettingsDialogue> {
             subtitle: const Text('Experiment'),
           ),
         ),
+        const Divider(),
+        BlocBuilder<PokemonListBloc, PokemonListState>(
+          buildWhen: (previous, current) => current.maybeMap(
+            orElse: () => false,
+            loaded: (value) => value.nextUrl == null,
+            loading: (value) => true,
+          ),
+          builder: (context, state) => state.maybeMap(
+            orElse: () => const SizedBox.shrink(),
+            loaded: (value) => Text.rich(
+              TextSpan(
+                children: [
+                  WidgetSpan(
+                    alignment: PlaceholderAlignment.middle,
+                    child: Icon(
+                      Icons.info,
+                      size: 14.sp,
+                      color: context.theme.dividerColor,
+                    ),
+                  ),
+                  TextSpan(
+                    text: ' ${value.pokemons.length} pokemons loaded',
+                  )
+                ],
+              ),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 12.sp,
+                color: context.theme.dividerColor,
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
 }
-
-typedef GridCount = ({IconData icon, String name, int value});
-
-final _gridCount = [
-  (name: 'one', value: 1, icon: Icons.looks_one),
-  (name: 'two', value: 2, icon: Icons.looks_two),
-  (name: 'three', value: 3, icon: Icons.looks_3)
-];
 
 extension _ThemeModeEx on ThemeMode {
   IconData get icon => switch (this) {
