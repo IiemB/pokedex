@@ -1,62 +1,46 @@
 part of 'settings_cubit.dart';
 
 class SettingsState {
-  final ThemeState themeState;
+  final ThemeMode themeMode;
   final int gridCount;
-  final bool showSearch;
+  final bool trueDarkTheme;
+  final bool scrollEffect;
 
   const SettingsState({
-    this.themeState = ThemeState.light,
+    this.themeMode = ThemeMode.system,
     this.gridCount = 2,
-    this.showSearch = false,
+    this.trueDarkTheme = false,
+    this.scrollEffect = false,
   });
 
   factory SettingsState.fromJson(Map<String, dynamic> json) {
-    final themes = {for (var theme in ThemeState.values) theme.name: theme};
+    final themes = {for (var theme in ThemeMode.values) theme.name: theme};
 
     return SettingsState(
-      themeState: themes[json['theme']] ?? ThemeState.light,
+      themeMode: themes[json['themeMode']] ?? ThemeMode.system,
       gridCount: json['grid'] as int? ?? 2,
-      showSearch: json['search'] as bool? ?? true,
+      trueDarkTheme: json['trueDarkTheme'] as bool? ?? false,
+      scrollEffect: json['scrollEffect'] as bool? ?? false,
     );
   }
 
   Map<String, dynamic> toJson() => {
-        'theme': themeState.name,
+        'themeMode': themeMode.name,
         'grid': gridCount,
-        'search': showSearch,
+        'trueDarkTheme': trueDarkTheme,
+        'scrollEffect': scrollEffect,
       };
 
   SettingsState copyWith({
-    ThemeState? themeState,
+    ThemeMode? themeMode,
     int? gridCount,
-    bool? showSearch,
+    bool? trueDarkTheme,
+    bool? scrollEffect,
   }) =>
       SettingsState(
-        themeState: themeState ?? this.themeState,
+        themeMode: themeMode ?? this.themeMode,
         gridCount: gridCount ?? this.gridCount,
-        showSearch: showSearch ?? this.showSearch,
+        trueDarkTheme: trueDarkTheme ?? this.trueDarkTheme,
+        scrollEffect: scrollEffect ?? this.scrollEffect,
       );
-}
-
-enum ThemeState {
-  light('Light', ThemeMode.light, Icons.light_mode),
-  dark('Dark', ThemeMode.dark, Icons.dark_mode_outlined),
-  dartAmoled('Dark Amoled', ThemeMode.dark, Icons.dark_mode),
-  ;
-
-  const ThemeState(this.themeName, this.themeMode, this.iconData);
-
-  final String themeName;
-  final ThemeMode themeMode;
-  final IconData iconData;
-}
-
-extension ThemeStateExtension on ThemeState {
-  ThemeData? get themeData => {
-        ThemeState.light: AppTheme.light,
-        ThemeState.dark: AppTheme.dark,
-        ThemeState.dartAmoled: AppTheme.darkAmoled,
-      }[this]
-          ?.modified;
 }

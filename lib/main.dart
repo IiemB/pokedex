@@ -4,9 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:pokedex/common/pokedex_bloc_observer.dart';
+import 'package:pokedex/common/common.dart';
 import 'package:pokedex/core/core.dart';
-import 'package:pokedex/data/data.dart';
 import 'package:pokedex/presentation/presentation.dart';
 
 Future<void> main() async {
@@ -43,15 +42,14 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(create: (context) => PokemonListBloc()),
           BlocProvider(create: (context) => SettingsCubit()),
-          BlocProvider(create: (context) => PokemonSwitcherCubit(Pokemon())),
           BlocProvider(create: (context) => SearchPokemonCubit()),
         ],
         child: BlocBuilder<SettingsCubit, SettingsState>(
           builder: (context, state) => MaterialApp.router(
-            debugShowCheckedModeBanner: false,
             title: 'Pokedex',
-            themeMode: state.themeState.themeMode,
-            theme: state.themeState.themeData,
+            themeMode: state.themeMode,
+            theme: AppTheme.light(),
+            darkTheme: AppTheme.dark(state.trueDarkTheme),
             routerDelegate: AutoRouterDelegate(
               router,
               navigatorObservers: () => [],

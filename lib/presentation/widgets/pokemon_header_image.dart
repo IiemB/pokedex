@@ -18,7 +18,7 @@ class PokemonHeaderImage extends StatelessWidget {
       bloc: pokemon.detailBloc,
       builder: (context, pokemonDetailState) {
         final image = pokemonDetailState.maybeMap(
-          orElse: () => Assets.images.icon.image(),
+          orElse: () => Assets.images.gif.pokeball.image(),
           loaded: (value) {
             final svgFile = value.svgFile;
             final imageFile = value.imageFile;
@@ -31,7 +31,7 @@ class PokemonHeaderImage extends StatelessWidget {
               return Image.file(imageFile);
             }
 
-            return Assets.images.icon.image();
+            return Assets.images.gif.pokeball.image();
           },
         );
 

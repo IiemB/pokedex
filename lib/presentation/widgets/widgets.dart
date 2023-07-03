@@ -9,4 +9,5 @@ export 'pokemon_images_carousel.dart';
 export 'pokemon_moves.dart';
 export 'pokemon_types.dart';
 export 'pokemon_weight_height.dart';
+export 'pokemons_pages_view.dart';
 export 'settings_dialogue.dart';

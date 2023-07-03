@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/common/common.dart';
@@ -5,97 +6,140 @@ import 'package:pokedex/core/core.dart';
 import 'package:pokedex/presentation/presentation.dart';
 import 'package:pokedex/utils/utils.dart';
 
-class SettingsDialogue extends StatelessWidget {
+class SettingsDialogue extends StatefulWidget {
   const SettingsDialogue({super.key});
 
   @override
+  State<SettingsDialogue> createState() => _SettingsDialogueState();
+}
+
+class _SettingsDialogueState extends State<SettingsDialogue> {
+  final _popUpMenuThemeKey = GlobalKey<PopupMenuButtonState>();
+  final _popUpMenuGridKey = GlobalKey<PopupMenuButtonState>();
+
+  @override
   Widget build(BuildContext context) {
-    return BottomSheet(
-      enableDrag: false,
-      onClosing: () {},
-      builder: (context) => Container(
-        color: context.theme.scaffoldBackgroundColor,
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(bottom: 8),
-                width: context.width / 5,
-                height: 8,
-                decoration: BoxDecoration(
-                  color:
-                      context.theme.colorScheme.onBackground.withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(4),
+    return SimpleDialog(
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text('Settings'),
+          IconButton(
+            tooltip: 'Clear Cache',
+            onPressed: () => cacheManager.clearCache().whenComplete(
+                  () => router.pushAndPopUntil(
+                    const SplashRoute(),
+                    predicate: (route) => false,
+                  ),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: ThemeState.values
-                    .map(
-                      (e) => BlocBuilder<SettingsCubit, SettingsState>(
-                        buildWhen: (previous, current) =>
-                            previous.themeState != current.themeState,
-                        builder: (context, state) => FloatingActionButton(
-                          backgroundColor: state.themeState == e
-                              ? context.theme.colorScheme.primary
-                              : null,
-                          heroTag: e.name,
-                          tooltip: e.themeName,
-                          onPressed: () =>
-                              BlocProvider.of<SettingsCubit>(context)
-                                  .updateTheme(e),
-                          child: Icon(e.iconData),
-                        ),
-                      ),
-                    )
-                    .toList(),
-              ),
-              BlocBuilder<SettingsCubit, SettingsState>(
-                buildWhen: (previous, current) =>
-                    previous.gridCount != current.gridCount,
-                builder: (context, state) => Slider(
-                  value: state.gridCount.toDouble(),
-                  divisions: 2,
-                  min: 1,
-                  max: 3,
-                  onChanged: (value) => BlocProvider.of<SettingsCubit>(context)
-                      .updateGridCount(value.toInt()),
-                ),
-              ),
-              // BlocBuilder<SettingsCubit, SettingsState>(
-              //   buildWhen: (previous, current) =>
-              //       previous.showSearch != current.showSearch,
-              //   builder: (context, state) => SwitchListTile(
-              //     value: state.showSearch,
-              //     title: const Text('Show Search'),
-              //     subtitle: const Text('Experimental'),
-              //     onChanged:
-              //         BlocProvider.of<SettingsCubit>(context).updateShowSearch,
-              //   ),
-              // ),
-              SizedBox(
-                width: context.width,
-                child: OutlinedButton.icon(
-                  onPressed: () => cacheManager.clearCache().whenComplete(
-                        () => router.pushAndPopUntil(
-                          const SplashRoute(),
-                          predicate: (route) => false,
-                        ),
-                      ),
-                  icon: const Icon(Icons.clear_all),
-                  label: const Text('Clear Cache'),
-                ),
-              ),
-            ]
-                .map(
-                  (e) => Padding(padding: const EdgeInsets.all(8.0), child: e),
+            icon: const Icon(Icons.cleaning_services_rounded),
+          )
+        ],
+      ),
+      children: [
+        ListTile(
+          onTap: () => _popUpMenuThemeKey.currentState?.showButtonMenu(),
+          title: const Text('Theme Mode'),
+          trailing: BlocBuilder<SettingsCubit, SettingsState>(
+            builder: (context, state) => PopupMenuButton<ThemeMode>(
+              key: _popUpMenuThemeKey,
+              onSelected: (value) =>
+                  BlocProvider.of<SettingsCubit>(context).updateTheme(value),
+              itemBuilder: (context) => [
+                ...ThemeMode.values.map(
+                  (e) => PopupMenuItem(
+                    value: e,
+                    enabled: e != state.themeMode,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [Text(e.name.titleCase), Icon(e.icon)],
+                    ),
+                  ),
                 )
-                .toList(),
+              ],
+              child: Icon(state.themeMode.icon),
+            ),
           ),
         ),
-      ),
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 200),
+          child: BlocBuilder<SettingsCubit, SettingsState>(
+            builder: (context, state) {
+              if (state.themeMode == ThemeMode.dark ||
+                  MediaQuery.of(context).platformBrightness ==
+                      Brightness.dark) {
+                return SwitchListTile(
+                  value: state.trueDarkTheme,
+                  onChanged: (value) => BlocProvider.of<SettingsCubit>(context)
+                      .trueDarkThemeToggle(value),
+                  title: const Text('True Black'),
+                );
+              }
+              return const SizedBox.shrink();
+            },
+          ),
+        ),
+        const Divider(),
+        ListTile(
+          onTap: () => _popUpMenuGridKey.currentState?.showButtonMenu(),
+          title: const Text('Grid Count'),
+          trailing: BlocBuilder<SettingsCubit, SettingsState>(
+            buildWhen: (previous, current) =>
+                previous.gridCount != current.gridCount,
+            builder: (context, state) => PopupMenuButton<int>(
+              key: _popUpMenuGridKey,
+              onSelected: (value) => BlocProvider.of<SettingsCubit>(context)
+                  .updateGridCount(value),
+              itemBuilder: (context) => [
+                ...List<GridCount>.from(_gridCount).map(
+                  (e) => PopupMenuItem(
+                    value: e.value,
+                    enabled: e.value != state.gridCount,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [Text(e.name.titleCase), Icon(e.icon)],
+                    ),
+                  ),
+                ),
+              ],
+              child: Icon(
+                _gridCount
+                        .singleWhereOrNull(
+                          (element) => element.value == state.gridCount,
+                        )
+                        ?.icon ??
+                    Icons.hdr_auto,
+              ),
+            ),
+          ),
+        ),
+        const Divider(),
+        BlocBuilder<SettingsCubit, SettingsState>(
+          builder: (context, state) => SwitchListTile(
+            value: state.scrollEffect,
+            onChanged: (value) => BlocProvider.of<SettingsCubit>(context)
+                .scrollEffectToggle(value),
+            title: const Text('Scroll Effect'),
+            subtitle: const Text('Experiment'),
+          ),
+        ),
+      ],
     );
   }
+}
+
+typedef GridCount = ({IconData icon, String name, int value});
+
+final _gridCount = [
+  (name: 'one', value: 1, icon: Icons.looks_one),
+  (name: 'two', value: 2, icon: Icons.looks_two),
+  (name: 'three', value: 3, icon: Icons.looks_3)
+];
+
+extension _ThemeModeEx on ThemeMode {
+  IconData get icon => switch (this) {
+        ThemeMode.system => Icons.brightness_auto,
+        ThemeMode.light => Icons.light_mode,
+        ThemeMode.dark => Icons.dark_mode,
+      };
 }

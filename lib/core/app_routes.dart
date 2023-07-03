@@ -44,10 +44,6 @@ class AppRouter extends $AppRouter {
           page: PokemonDetailsRoute.page,
           path: PokemonDetailsPage.routeName,
         ),
-        AutoRoute(
-          page: SettingsRoute.page,
-          path: SettingsPage.routeName,
-        ),
       ];
 }
 

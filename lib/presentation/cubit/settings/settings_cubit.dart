@@ -1,35 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:pokedex/common/common.dart';
-import 'package:pokedex/utils/utils.dart';
 
 part 'settings_state.dart';
 
 class SettingsCubit extends HydratedCubit<SettingsState> {
   SettingsCubit() : super(const SettingsState());
 
-  void updateTheme(ThemeState? themeState) {
-    final style = themeState?.themeData?.appBarTheme.systemOverlayStyle;
-
-    if (style != null) {
-      SystemChrome.setSystemUIOverlayStyle(
-        style.copyWith(
-          statusBarColor: Colors.transparent,
-          statusBarIconBrightness: themeState?.themeMode == ThemeMode.dark
-              ? Brightness.light
-              : Brightness.dark,
-        ),
-      );
-    }
-    emit(state.copyWith(themeState: themeState));
-  }
+  void updateTheme(ThemeMode? themeMode) =>
+      emit(state.copyWith(themeMode: themeMode));
 
   void updateGridCount(int? gridCount) =>
       emit(state.copyWith(gridCount: gridCount));
 
-  void updateShowSearch(bool? showSearch) =>
-      emit(state.copyWith(showSearch: showSearch));
+  void trueDarkThemeToggle(bool? trueDarkTheme) =>
+      emit(state.copyWith(trueDarkTheme: trueDarkTheme));
+
+  void scrollEffectToggle(bool? scrollEffect) =>
+      emit(state.copyWith(scrollEffect: scrollEffect));
 
   @override
   SettingsState? fromJson(Map<String, dynamic> json) =>

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pokedex/core/core.dart';
 import 'package:pokedex/data/data.dart';
 import 'package:pokedex/presentation/presentation.dart';
@@ -16,7 +17,7 @@ class PokemonDetailHeader extends StatelessWidget {
           BlocBuilder<PokemonDetailsBloc, PokemonDetailsState>(
         bloc: pokemon.detailBloc,
         builder: (context, state) {
-          var backgroundColor = state.maybeMap(
+          final backgroundColor = state.maybeMap(
             orElse: () => pokemon.optionColor,
             loaded: (value) =>
                 value.palette?.dominantColor?.color ?? pokemon.optionColor,
@@ -24,37 +25,34 @@ class PokemonDetailHeader extends StatelessWidget {
 
           return SliverAppBar(
             expandedHeight: context.height / 3,
+            collapsedHeight: context.height / 5,
             floating: true,
+            automaticallyImplyLeading: false,
             backgroundColor: backgroundColor,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Pokedex',
-                  style: TextStyle(
-                    color: backgroundColor.getContrastColor,
-                  ),
-                ),
-                Text(
-                  state.maybeMap(
-                    orElse: () => '',
-                    loaded: (value) => '# ${value.pokemonDetails.id}',
-                  ),
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: backgroundColor.getContrastColor,
+                const SizedBox.shrink(),
+                Flexible(
+                  child: Text(
+                    state.maybeMap(
+                      orElse: () => '',
+                      loaded: (value) => '# ${value.pokemonDetails.id}',
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: backgroundColor.getContrastColor,
+                    ),
                   ),
                 ),
               ],
             ),
             leading: IconButton(
               onPressed: router.pop,
-              icon: Icon(
-                Icons.arrow_back_ios_new,
-                color: backgroundColor.getContrastColor,
-              ),
+              color: backgroundColor.getContrastColor,
+              icon: const Icon(Icons.cancel),
             ),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
@@ -67,11 +65,22 @@ class PokemonDetailHeader extends StatelessWidget {
             //   ),
             // ),
             flexibleSpace: Padding(
-              padding: const EdgeInsets.only(
-                top: 24 + kToolbarHeight,
-                bottom: 8,
-              ),
+              padding: const EdgeInsets.all(8),
               child: Center(child: PokemonHeaderImage(pokemon: pokemon)),
+            ),
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(kToolbarHeight),
+              child: Text(
+                pokemon.name,
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: backgroundColor.getContrastColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 28.sp,
+                ),
+              ),
             ),
           );
         },

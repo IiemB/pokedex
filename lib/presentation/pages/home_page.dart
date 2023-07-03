@@ -36,78 +36,78 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) => Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Scrollbar(
+    return Scaffold(
+      extendBody: true,
+      body: Scrollbar(
+        controller: _scrollController,
+        radius: const Radius.circular(16),
+        child: CustomScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           controller: _scrollController,
-          radius: const Radius.circular(16),
-          child: CustomScrollView(
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            controller: _scrollController,
-            slivers: [
-              // Handle slow animated padding on notched IPhone
-              if (Platform.isIOS) ...[
-                SliverAppBar(
-                  backgroundColor: context.theme.primaryColor,
-                  titleTextStyle: context.theme.appBarTheme.titleTextStyle
-                      ?.copyWith(color: context.theme.colorScheme.onPrimary),
-                  floating: true,
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                      bottom: Radius.circular(12),
-                    ),
+          slivers: [
+            // Handle slow animated padding on notched IPhone
+            if (Platform.isIOS) ...[
+              SliverAppBar(
+                backgroundColor: context.theme.primaryColor,
+                titleTextStyle:
+                    context.theme.appBarTheme.titleTextStyle?.copyWith(
+                  color: context.theme.colorScheme.onPrimary,
+                ),
+                floating: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    bottom: Radius.circular(12),
                   ),
-                  title: const Text('Pokedex'),
-                  centerTitle: false,
-                  bottom: PreferredSize(
-                    preferredSize: const Size.fromHeight(kToolbarHeight),
+                ),
+                title: const Text('Pokedex'),
+                centerTitle: false,
+                bottom: PreferredSize(
+                  preferredSize: const Size.fromHeight(kToolbarHeight),
+                  child: _SearchPokemonField(
+                    searchController: _searchController,
+                    scrollController: _scrollController,
+                  ),
+                ),
+              ),
+              _PokemonList(searchController: _searchController)
+            ] else
+              SliverStickyHeader.builder(
+                builder: (context, state) {
+                  return AnimatedPadding(
+                    duration: const Duration(milliseconds: 100),
+                    padding: EdgeInsets.only(
+                      top: state.isPinned
+                          ? MediaQuery.of(context).padding.top
+                          : 0,
+                    ),
                     child: _SearchPokemonField(
                       searchController: _searchController,
                       scrollController: _scrollController,
                     ),
-                  ),
-                ),
-                _PokemonList(searchController: _searchController)
-              ] else
-                SliverStickyHeader.builder(
-                  builder: (context, state) {
-                    return AnimatedPadding(
-                      duration: const Duration(milliseconds: 100),
-                      padding: EdgeInsets.only(
-                        top: state.isPinned
-                            ? MediaQuery.of(context).padding.top
-                            : 0,
-                      ),
-                      child: _SearchPokemonField(
-                        searchController: _searchController,
-                        scrollController: _scrollController,
-                      ),
-                    );
-                  },
-                  sliver: _PokemonList(searchController: _searchController),
-                ),
-              BlocBuilder<PokemonListBloc, PokemonListState>(
-                buildWhen: (previous, current) => current.maybeMap(
-                  orElse: () => false,
-                  loaded: (value) => value.nextUrl == null,
-                  loading: (value) => true,
-                ),
-                builder: (context, state) => state.maybeMap(
-                  orElse: () => const SliverToBoxAdapter(),
-                  loading: (value) => const SliverToBoxAdapter(
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'Loading data...',
-                        textAlign: TextAlign.center,
-                      ),
+                  );
+                },
+                sliver: _PokemonList(searchController: _searchController),
+              ),
+            BlocBuilder<PokemonListBloc, PokemonListState>(
+              buildWhen: (previous, current) => current.maybeMap(
+                orElse: () => false,
+                loaded: (value) => value.nextUrl == null,
+                loading: (value) => true,
+              ),
+              builder: (context, state) => state.maybeMap(
+                orElse: () => const SliverToBoxAdapter(),
+                loading: (value) => const SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      'Loading data...',
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -147,7 +147,7 @@ class _PokemonList extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Assets.images.icon.image(
+                        Assets.images.gif.pokeball.image(
                           height: context.width / 2,
                         ),
                         const Gap(8),
@@ -158,13 +158,15 @@ class _PokemonList extends StatelessWidget {
                 );
               }
 
-              return SliverGrid(
+              return SliverGrid.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: settingsState.gridCount,
                 ),
-                delegate: SliverChildListDelegate(
-                  pokemons.map((e) => PokemonCard(pokemon: e)).toList(),
-                ),
+                itemBuilder: (context, index) {
+                  final pokemon = pokemons.elementAt(index);
+
+                  return PokemonCard(pokemon: pokemon);
+                },
               );
             },
           ),
@@ -214,24 +216,32 @@ class _SearchPokemonField extends StatelessWidget {
             suffixIcon: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: context.theme.colorScheme.onPrimary,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: BlocBuilder<SearchPokemonCubit, List<Pokemon>>(
-                    builder: (context, state) => Text(
-                      state.length.toString(),
-                      style: TextStyle(
-                        color: context.theme.colorScheme.primary,
+                BlocBuilder<SearchPokemonCubit, List<Pokemon>>(
+                  builder: (context, state) {
+                    final lenght = state.length;
+
+                    if (lenght <= 0) return const SizedBox.shrink();
+
+                    return AnimatedContainer(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: context.theme.colorScheme.onPrimary,
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                    ),
-                  ),
+                      duration: const Duration(milliseconds: 200),
+                      child: Text(
+                        lenght.toString(),
+                        style: TextStyle(
+                          color: context.theme.colorScheme.primary,
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 IconButton(
                   tooltip: 'Settings',
-                  onPressed: () => context.showBottomSheet(
+                  onPressed: () => showDialog(
+                    context: context,
                     builder: (context) => const SettingsDialogue(),
                   ),
                   color: context.theme.colorScheme.onPrimary,

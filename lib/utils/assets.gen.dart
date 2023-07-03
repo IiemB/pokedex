@@ -12,8 +12,26 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/icon.png
-  AssetGenImage get icon => const AssetGenImage('assets/images/icon.png');
+  $AssetsImagesGifGen get gif => const $AssetsImagesGifGen();
+  $AssetsImagesPngGen get png => const $AssetsImagesPngGen();
+}
+
+class $AssetsImagesGifGen {
+  const $AssetsImagesGifGen();
+
+  /// File path: assets/images/gif/pokeball.gif
+  AssetGenImage get pokeball =>
+      const AssetGenImage('assets/images/gif/pokeball.gif');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [pokeball];
+}
+
+class $AssetsImagesPngGen {
+  const $AssetsImagesPngGen();
+
+  /// File path: assets/images/png/icon.png
+  AssetGenImage get icon => const AssetGenImage('assets/images/png/icon.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [icon];

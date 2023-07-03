@@ -32,7 +32,7 @@ class SplashPage extends StatelessWidget {
         body: Stack(
           children: [
             Center(
-              child: Assets.images.icon.image(),
+              child: Assets.images.gif.pokeball.image(),
             ),
             Positioned.fill(
               child: Align(

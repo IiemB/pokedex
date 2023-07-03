@@ -56,7 +56,7 @@ class PokemonMoves extends StatelessWidget {
 
                   return ListTile(
                     title: Text(
-                      '${move.moveDetail?.name?.replaceAll('-', ' ').capitalizeAllWords}',
+                      '${move.moveDetail?.name?.formSlugThenCapitalized}',
                     ),
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
